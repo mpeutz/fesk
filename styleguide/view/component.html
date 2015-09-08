@@ -1,0 +1,5 @@
+<div class="msg-content-area">
+    <div class="msg-component-block" ng-repeat="sec in msg | filter:categoryGroup( ) ">
+        <msg-component data-tags="{{sec.tags}}"></msg-component>
+    </div>
+</div>

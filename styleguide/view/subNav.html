@@ -1,0 +1,14 @@
+<div class="msg-sub-nav-heading">
+    <div class="msg-sub-navheading-title">Sections</div>
+    <div class="msg-markup-show-icon" ng-click="isShown=!isShown">
+        <div svg-icon icon="view"></div>
+    </div>
+</div>
+<ul class="msg-sub-nav-list" du-spy-contex du-scroll-container="msg-content">
+    <li class="msg-sub-nav-item repeat-animation" ng-repeat="section in msg | filter:sectionGroup( ) " >
+        <a href="#{{ section.title | flatten}}" du-scrollspy du-smooth-scroll offset="80">
+            <span class="msg-name">{{section.title}}</span>
+            <span class="msg-ref">{{section.order}}</span>
+        </a>
+    </li>
+</ul>

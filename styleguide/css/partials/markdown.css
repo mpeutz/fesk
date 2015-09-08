@@ -1,0 +1,12 @@
+.guideline .msg-content-area {
+    max-width: 800px;
+    }
+
+.guideline pre {
+    padding: 2em;
+    background-color: #fff;
+    }
+
+.guideline pre b {
+    display: inline-block;
+    }

@@ -1,0 +1,78 @@
+<!-- component header -->
+<div class="msg-header" ng-if="sec.group">
+    <div class="msg-title">
+        <a class="msg-title-isolate" href="#/{{sec.group}}/{{sec.order}}">
+            <span class="msg-title-number">{{sec.order}}</span>
+            <span class="msg-title-text">{{ sec.title}}</span>
+        </a>
+        <span class="msg-source">{{sec.file}}</span>
+        <div class="msg-tags">
+            <div class="msg-java-icon msg-tag-tooltip" title="this component requires javascript" ng-if="sec.tags | inArray: 'scripted'">
+                <div svg-icon icon="java"></div>
+            </div>
+            <div class="msg-beta-icon msg-tag-tooltip" title="this is a beta component" ng-if="sec.tags | inArray: 'beta'">
+                <div svg-icon icon="beta"></div>
+            </div>
+            <div class="msg-compatiblity-icon" ng-if="sec.type == 'markup'">
+                <div svg-icon icon="compatiblity"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- component description -->
+<div class="msg-description">
+    <pre class="msg-description-text" ng-bind-html="renderHtml(sec.description.toString())"></pre>
+</div>
+
+<!-- component note -->
+<div class="msg-note" ng-if="sec.note != 'undefined'">
+    <div class="msg-not-text">{{sec.note}}</div>
+</div>
+
+<!-- component modifiers -->
+<div class="msg-mod msg-{{sec.type}}-block"  ng-if="sec.code.length > 1">
+    <ul class="msg-mod-list">
+        <li class="msg-mod-item" ng-repeat="mod in sec.code">
+            <div class="msg-mod-text">
+                <span class="msg-mods-classname">{{mod.title}}</span>
+                <span> · </span>
+                <span class="msg-mods-description">{{mod.description}}</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- color documentation -->
+<div class="msg-colors" ng-if="sec.color != false">
+    <ul class="msg-color-list">
+        <li class="msg-color-item" ng-repeat="hue in sec.color">
+            <div class="msg-color-item-chip" ng-style="{backgroundColor:hue.hue}"></div>
+            <div class="msg-color-item-hue">{{hue.hue}}</div>
+            <div class="msg-color-item-name">{{hue.title}}</div>
+            <div class="msg-color-item-use">{{hue.use}}</div>
+        </li>
+    </ul>
+</div>
+
+<!-- component example -->
+<div class="msg-example" ng-if="sec.code != false">
+
+    <ul class="msg-code-list">
+        <li class="msg-code-item" ng-repeat="codes in sec.code">
+            <div class="msg-code-title" ng-if="sec.code.length > 1">{{codes.title}}</div>
+            <shadow-dom>
+                <!-- <pre ng-prism class="language-{{sec.type}} msg-markup-code line-numbers" ng-bind-html="renderHtml(codes.code.toString())"></pre> -->
+                <pre class="msg-example-code" ng-bind-html="renderHtml(codes.code.toString())"></pre>
+            </shadow-dom>
+        </li>
+    </ul>
+</div>
+
+<!-- Compnent Markup -->
+<div class="msg-markup" ng-if="sec.type !='chapter' && sec.type !='color' && sec.code !=false">
+    <button  class="msg-markup-show-btn" ng-click="isShown=!isShown">{{ isShown ? 'Hide Markup' : 'Show Markup' }}</button>
+    <div class="msg-markup-container" ng-show="isShown">
+        <pre ng-prism class="language-{{sec.type}} msg-markup-code line-numbers">{{sec.code[0].code}}</pre>
+    </div>
+</div>

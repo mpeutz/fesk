@@ -1,0 +1,17 @@
+<div class="msg-sticky-header" ng-repeat="sec in msg | filter:categoryGroup( ) " ng-if="sec.reference === '0'" sticky-header>
+    <div class="msg-sticky-header-wrap">
+        <span class="msg-title-number">{{sec.group}}</span>
+        <span class="msg-title-text">{{ sec.title}}</span>
+        <div class="msg-sticky-header-top" ng-click="toTheTop()">
+            <div class="msg-top-icon">
+                <div svg-icon icon="top"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="msg-content-area">
+    <div class="msg-component-block" ng-repeat="sec in msg | filter:categoryGroup( ) " id="{{ sec.title | flatten}}">
+        <msg-component  data-tags="{{sec.tags | cleaned}}"></msg-component>
+    </div>
+</div>

@@ -1,0 +1,271 @@
+@charset 'UTF-8';
+
+/*
+guide: Transim Test Styles
+client: Company
+description: Basic styleguide test file
+version: 0.0.1
+date: 4/23/2015
+author: Mike
+email: transim@transim.com
+url: www.transim.com
+*/
+
+
+/*
+Chapter: 1
+Title: Variables
+---
+Description:
+Style setup variables
+*/
+
+/*
+Colors: 1.1
+Title: Base Colors
+
+Description:
+Use these colors in main site and branding.
+
+palette:
+main-color
+#f60
+use as main color
+~~~
+text-color
+#4A515A
+use as text color
+
+*/
+
+/*
+Colors: 1.2
+Title: material Design Colors
+
+Description:
+Use the material design colors as accents when needed.
+
+palette:
+red
+#f44336
+Material Design Red
+~~~
+pink
+#e91e63
+Material Design Pink
+~~~
+purple
+#9c27b0
+Material Design Purple
+~~~
+deeppurple
+#673ab7
+Material Design Deep Purple
+~~~
+indigo
+#3f51b5
+Material Design Indego
+~~~
+blue
+#2196f3
+Material Design Blue
+~~~
+lightblue
+#03a9f4
+Material Design Light Blue
+~~~
+cyan
+#00bcd4
+Material Design Cyan
+~~~
+teal
+#009688
+Material Design Teal
+~~~
+green
+#4caf50
+Material Design Green
+~~~
+lightgreen
+#8bc34a
+Material Design Light Green
+~~~
+lime
+#cddc39
+Material Design Lime
+~~~
+yellow
+#ffeb3b
+Material Design Yellow
+~~~
+amber
+#ffc107
+Material Design Amber
+~~~
+orange
+#ff9800
+Material Design Orange
+~~~
+deeporange
+#ff5722
+Material Design Deep Orange
+~~~
+brown
+#795548
+Material Design Brown
+~~~
+gray
+#9e9e9e
+Material Design Gray
+~~~
+bluegray
+#607d8b
+Material Design Blue Gray
+
+*/
+
+/*
+Chapter: 3
+Title: Typonomy
+---
+Description:
+<b>95% of the information on the web is written language. It is only logical to say that a web designer should get good training in the main discipline of shaping written information, in other words Typography.</b>  <i>- - Oliver Reichenstein</i><br>
+This section initializes the html body and the basic text elements.
+*/
+
+
+/*
+Section: 3.1
+Title: Initialize
+Compatibility: 1,2,3,4,5,6
+Type:  html
+Tags: body, html, universal, box-sizing
+---
+Description:
+Initializes the html body by removing any margin and padding so the content makes full use of the viewport. This also sets all imgs to 100% max width so they do not breakl out from their containers. Finally a universal "box-sizing border-box" is set on all elements.
+*/
+
+.ui,
+.ui:before,
+.ui:after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-size: 14px;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+.ui:focus,
+.ui:focus:before,
+.ui:focus:after {
+    outline: 0;
+}
+/*
+Section: 3.2
+Title: Headers
+Compatibility: 1,2,3,4,5,6
+Type:  html
+Tags:
+---
+Description:
+Stardard headings can be set using tag (h1, h3, h4, ...)
+---
+Code:
+<h1 class="ui"> Heading Level 1 </h1>
+<h2 class="ui"> Heading Level 2 </h2>
+<h3 class="ui"> Heading Level 3 </h3>
+<h4 class="ui"> Heading Level 4 </h4>
+<h5 class="ui"> Heading Level 5 </h5>
+<h6 class="ui"> Heading Level 6 </h6>
+<p class="ui"> The p tag defines a paragraph. Browsers automatically add some space (margin) before and after each p element. The margins can be modified with CSS (with the margin properties).</p>
+*/
+
+h2.ui,
+h3.ui,
+h4.ui,
+h5.ui,
+h6.ui,
+p.ui {
+    font-family: sans-serif;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 1.65;
+    color: inherit;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    text-rendering: optimizeLegibility;
+}
+
+h1.ui,
+.ui.h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+h2.ui,
+.ui.h2 {
+    font-size: 2em;
+}
+
+h3.ui,
+.ui.h3 {
+    font-size: 1.618em;
+    font-weight: 700;
+}
+
+h4.ui,
+.ui.h4 {
+    font-size: 1.1675em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+h5.ui,
+.ui.h5 {
+    font-size: 1em;
+    text-transform: uppercase;
+}
+
+h6.ui,
+.ui.h6 {
+    font-size: 0.8em;
+}
+
+p.ui {
+    white-space: pre-wrap;
+}
+/*
+Section: 3.3
+Title: Anchors
+Compatibility: 1,2,3,4,5,6
+Type:  html
+Tags: scripted, beta, links
+---
+Modifiers:
+:hover  - Subtle hover highlight, and underline.
+---
+Description:
+Anchors by default will take the main color of the site and get underline on hover.
+---
+Code:
+<a href="#" class="ui {$mod}">Link 1</a>
+<a href="#" class="ui {$mod}">Link 2</a>
+*/
+
+a.ui {
+    text-decoration: none;
+    color: #555;
+}
+
+a.ui:hover,
+a.ui:active {
+    color: #333;
+    text-decoration: underline;
+}

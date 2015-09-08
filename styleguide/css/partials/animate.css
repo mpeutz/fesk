@@ -1,0 +1,142 @@
+.msg-main {
+    position: relative;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    height: 100vh;
+
+    -webkit-transition: 0.25s all cubic-bezier(0.95, 0.05, 0.795, 0.035);
+            transition: 0.25s all cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+.content-animate.ng-enter,
+.content-animate.ng-leave {
+    position: absolute;
+
+    height: 100%;
+
+    -webkit-transition: 0.25s all cubic-bezier(0.215, 0.61, 0.355, 1);
+            transition: 0.25s all cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.content-animate.ng-enter {
+    z-index: 100;
+
+    transform: translateX(100%);
+
+    opacity: 0;
+}
+
+.content-animate.ng-enter.ng-enter-active {
+    transform: translateX(0);
+
+    opacity: 1;
+
+    filter: url('#motionBlur');
+}
+
+.content-animate.ng-leave {
+    z-index: 101;
+
+    transform: translateX(0);
+
+    opacity: 1;
+}
+
+.content-animate.ng-leave.ng-leave-active {
+    transform: translateX(100%);
+
+    opacity: 0;
+
+    filter: url('#motionBlur');
+}
+
+.msg-container {
+    position: relative;
+
+    height: 100vh;
+}
+
+.msg-subnav.ng-enter,
+.msg-subnav.ng-leave {
+    -webkit-transition: 0.25s all cubic-bezier(0.215, 0.61, 0.355, 1);
+            transition: 0.25s all cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translateX(0);
+}
+
+.msg-subnav.ng-enter {
+    transform: translateX(-100%);
+}
+
+.msg-subnav.ng-leave,
+.msg-subnav.ng-enter.ng-enter-active {
+    transform: translateX(0);
+}
+
+.msg-subnav.ng-leave.ng-leave-active {
+    transform: translateX(-100%);
+}
+
+.repeat-animation {
+    box-sizing: border-box;
+
+    transform: translateX(0);
+}
+
+.repeat-animation.ng-enter-stagger,
+.repeat-animation.ng-leave-stagger,
+.repeat-animation.ng-move-stagger {
+    /* 200ms will be applied between each sucessive enter operation */
+    -webkit-transition-delay: 0.1s;
+            transition-delay: 0.1s;
+}
+
+.repeat-animation.ng-enter,
+.repeat-animation.ng-leave,
+.repeat-animation.ng-move {
+    -webkit-transition: 0.2s linear all;
+            transition: 0.2s linear all;
+}
+
+.repeat-animation.ng-leave.ng-leave-active,
+.repeat-animation.ng-enter,
+.repeat-animation.ng-move {
+    -webkit-transition: 0.2s linear all;
+            transition: 0.2s linear all;
+    transform: translateX(-100%);
+
+    opacity: 0;
+
+    filter: url('#motionBlur');
+}
+
+.repeat-animation.ng-leave,
+.repeat-animation.ng-move.ng-move-active,
+.repeat-animation.ng-enter.ng-enter-active {
+    transform: translateX(0);
+
+    opacity: 1;
+
+    filter: url('#motionBlur');
+}
+
+.msg-markup-container {
+    position: relative;
+    top: 0;
+
+    overflow: hidden;
+
+    max-height: 600px;
+
+    transition: max-height 0.5s ease-out;
+}
+
+.msg-markup-container.ng-hide {
+    max-height: 0;
+}
+
+.msg-markup-container.ng-hide-add,
+.msg-markup-container.ng-hide-remove {
+    display: block;
+}

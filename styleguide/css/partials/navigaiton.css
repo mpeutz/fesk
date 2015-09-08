@@ -1,0 +1,225 @@
+.msg-sub-nav-list,
+.msg-menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    }
+
+.msg-sub-nav-item a,
+.msg-menu-item a {
+    display: block;
+    padding: 0.8em 1em;
+    transition: all 0.15s ease-in;
+    text-decoration: none;
+    color: #fff;
+    border-right: 3px solid transparent;
+    }
+
+.msg-sub-nav-item:hover a,
+.msg-menu-item:hover a {
+    background-color: rgba(255, 255, 255, 0.1);
+    }
+
+.msg-sub-nav-item .active,
+.msg-menu-item .active {
+    transition: all 0.25s ease-in;
+    color: var(--main-color);
+    border-right-color: var(--main-color);
+    background-color: rgba(255, 255, 255, 0.05);
+    }
+
+.msg-name {
+    font-size: 0.8em;
+    display: inline-block;
+    width: 80%;
+    margin-right: -4px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    }
+
+.msg-ref {
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+    vertical-align: middle;
+    }
+
+.msg-sticky-header {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    transition: transform 0.16s ease-in;
+    transform: translateY(-100%);
+    }
+
+.msg-sticky-header-wrap {
+    position: relative;
+    box-sizing: border-box;
+    padding: 1.35em 1.35em 1.35em 34.5%;
+    background-color: var(--main-color);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+.scrolled.msg-sticky-header {
+    transition: transform 0.3s ease-in;
+    transform: translateY(0);
+    }
+
+.msg-sticky-header-top {
+    font-weight: 700;
+    position: absolute;
+    top: 8px;
+    right: 1em;
+    display: inline-block;
+    padding: 0.5em 0.7em;
+    color: #fff;
+    border-radius: 3px;
+    }
+
+.msg-sticky-header-top:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+    }
+
+.msg-header {
+    position: relative;
+    overflow: hidden;
+    }
+
+.msg-search {
+    font-size: 1.3em;
+    width: 100%;
+    padding: 1em;
+    color: #fff;
+    border: 0;
+    background-color: #0a0d0f;
+    }
+
+.msg-search:focus {
+    color: #fff;
+    outline: 0;
+    background-color: #323a44;
+    }
+
+.msg-header-title,
+.msg-sub-navheading-title {
+    font-size: 1.1vw;
+    line-height: 54px;
+    position: absolute;
+    top: 0;
+    left: 1em;
+    pointer-events: none;
+    color: #fff;
+    }
+
+.is-focused + .msg-header-title {
+    opacity: 0;
+    }
+
+.msg-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    }
+
+.msg-search-icon {
+    position: absolute;
+    top: 1.25em;
+    width: 24px;
+    height: 24px;
+
+    fill: #fff;
+    }
+
+.msg-top-icon {
+    position: relative;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+
+    fill: #fff;
+    }
+
+.msg-search-icon {
+    pointer-events: none;
+    }
+
+.msg-clear-icon {
+    position: absolute;
+    top: 0.95em;
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    border-radius: 50%;
+
+    fill: #fff;
+    }
+
+.msg-clear-icon:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+    }
+
+.msg-clear-icon,
+.is-focused ~ .msg-search-icon {
+    right: -2em;
+    transition: right 0.2s ease-out;
+    }
+
+.msg-search-icon,
+.is-focused ~ .msg-clear-icon {
+    right: 1em;
+    transition: right 0.2s ease-out;
+    }
+
+.msg-sub-nav-heading,
+.msg-back {
+    position: relative;
+    width: 100%;
+    height: 57px;
+    background-color: #171d25;
+    }
+
+.msg-markup-show-icon,
+.msg-back-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 57px;
+    height: 57px;
+    cursor: pointer;
+    transition: background-color 0.7s ease-out;
+    border: 0;
+    background: transparent;
+    }
+
+.msg-markup-show-icon:hover,
+.msg-back-button:hover {
+    transition: background-color 0.2s ease-out;
+    background-color: rgba(255, 255, 255, 0.15);
+    }
+
+.msg-back-button:focus {
+    outline: 0;
+
+    outlin-color: #fff;
+    }
+
+.msg-svg-view,
+.msg-back-button .msg-icon {
+    position: absolute;
+    top: 16px;
+    right: 1em;
+    width: 24px;
+    height: 24px;
+
+    fill: #fff;
+    }
+
+.msg-svg-view:active,
+.msg-back-button .msg-icon:active {
+    fill: currentColor;
+    }

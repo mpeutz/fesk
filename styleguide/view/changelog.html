@@ -1,0 +1,17 @@
+<div class="msg-content-area">
+    <h1>Change Log</h1>
+
+    <ul class="msg-changlog" >
+    <li class="msg-changlog_item" ng-repeat="cl in changelog" >
+
+            <div class="msg-changlog_version">
+                <span class="msg-changelog_text">Version: </span>
+                <span class="msg-changlelog_number"> {{cl.version}}</span>
+            </div>
+            <div class="msg-changelog_comment">{{cl.comment}}</div>
+            <div class="msg-changelog_date">{{cl.date}}</div>
+            <hr/>
+
+    </li>
+</ul>
+</div>

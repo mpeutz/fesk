@@ -1,0 +1,76 @@
+<div class="msg-content-area">
+
+    <h1>Specificity Graph</h1>
+
+    <p>Harry Roberts first suggested creating a Specificity Graph to get a better picture of your CSS.</p>
+    <p>The Specificity Graph works by taking a look at your entire project’s CSS, and plotting the specificity of all of its selectors on a simple line graph. On the x axis we plot Location in Stylesheet and on the y axis we plot the specificity of that selector.</p>
+    <p>In general the graph should progress from lower to higher with few spikes occurring at the end. Spikes that occur mid-graph could lead to maintainability issues since CSS that occurs afterwards needs to meet or exceed that level of specificity to override earlier CSS.</p>
+
+    <div class="msg-graph">
+        <object data="assets/graph.svg" type="image/svg+xml">
+          <!-- <img src="test.jpg" /> -->
+        </object>
+    </div>
+
+    <h1>Dashboard</h1>
+
+    <ul class="msg-dash-base">
+        <li class="msg-dash-item msg-dash-publish">
+            <div class="msg-stat-key">Date stylesheet was compiled: </div>
+            <div class="msg-stat-value">{{stats[0].published | date : format : timezone}}</div>
+        </li>
+        <li class="msg-dash-item msg-dash-size">
+            <div class="msg-stat-key">Stylesheet Size: </div>
+            <div class="msg-stat-value">{{stats[0].fileSize}}</div>
+        </li>
+        <li class="msg-dash-item msg-dash-rules">
+            <div class="msg-stat-key">Number of rules: </div>
+            <div class="msg-stat-value">{{stats[1].ruleCount}}</div>
+        </li>
+        <li class="msg-dash-item msg-dash-selector">
+            <div class="msg-stat-key">Number of selectors: </div>
+            <div class="msg-stat-value">{{stats[1].selectorCount}}</div>
+        </li>
+        <li class="msg-dash-item msg-dash-selector">
+            <div class="msg-stat-key">Number of declorations: </div>
+            <div class="msg-stat-value">{{stats[1].declorationCount}}</div>
+        </li>
+        <li class="msg-dash-item msg-dash-selector">
+            <div class="msg-stat-key">Number of Media Queries: </div>
+            <div class="msg-stat-value">{{stats[1].mediaQuerieCount}}</div>
+        </li>
+        <li class="msg-dash-item msg-dash-simplicity">
+            <div class="msg-stat-key">Level of simplicity: </div>
+            <div class="msg-stat-value">{{(stats[1].ruleCount /  stats[1].selectorCount) * 100 | number:2 }}%</div>
+        </li>
+    </ul>
+
+
+
+    <!-- <div id="specificity"></div>
+
+    <ul class="msg-dash-body">
+        <li class="msg-dash-item">
+            <div class="msg-stat-key">Most identifier: </div>
+            <div class="msg-stat-value">{{stats.mostIdentifier}}</div>
+        </li>
+                <li class="msg-dash-item">
+            <div class="msg-stat-key">Most identifier selector: </div>
+            <div class="msg-stat-value">{{stats.mostIdentifierSelector}}</div>
+        </li>
+        <li class="msg-dash-item">
+            <div class="msg-stat-key">Lowest Cohesion: </div>
+            <div class="msg-stat-value">{{stats.lowestCohesion}}</div>
+        </li>
+        <li class="msg-dash-item">
+            <div class="msg-stat-key">Lowest Cohesion selectors: </div>
+            <div class="msg-stat-value">
+                <ul class="msg-dash-sub-list">
+                    <li class="msg-dash-sub-item" ng-repeat="lowest in stats.lowestCohesionSelector">{{lowest}}</li>
+                </ul>
+            </div>
+        </li>
+    </ul> -->
+
+</div>
+

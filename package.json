@@ -1,0 +1,37 @@
+{
+  "name": "fesk",
+  "version": "0.1.0",
+  "description": "FESK (Front-end Starter Kit) is a simple web starter kit",
+  "main": "fesk.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpeutz/fesk.git"
+  },
+  "keywords": [
+    "starter",
+    "kit",
+    "styleguide",
+    "postcss"
+  ],
+  "author": "Mike Peutz <mpeutz@gmail.com> (http://peutzdesign.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mpeutz/fesk/issues"
+  },
+  "homepage": "https://github.com/mpeutz/fesk#readme",
+  "bin": {
+    "fesk": "fesk.js"
+  },
+  "devDependencies": {
+    "cpr": "^0.4.1",
+    "cssnext": "^1.8.4",
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
+    "path": "^0.11.14",
+    "wrench": "^1.5.8",
+    "yargs": "^3.23.0"
+  }
+}
