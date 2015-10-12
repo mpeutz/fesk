@@ -27,7 +27,7 @@ var argv        = require( "yargs" )
                 .example( "fesk -i", "Follow prompts to initialize fesk" )
                 .example( "fesk -u", "Follow prompts to update styleguide version" )
                 .example( "fesk -g", "Parses styleguide" )
-                .example( "fesk -t", "Follow prompts to updatre styleguide theme" )
+                .example( "fesk -t", "Follow prompts to update styleguide theme" )
                 .example( "fesk", "generate styleguide" )
                 .epilog( "Produced by fesk - Made in Oregon." )
                   .argv;
@@ -242,7 +242,7 @@ function feskColors() {
 }
 
 function feskTheme(themeColor) {
-    var themeCSS = " /* Basic themeing classes (color, background-color, border-color) */ .theme-main { color: " + themeColor + "; } .theme-main-color { background-color: " + themeColor + "; } .theme-main-border { border-color: " + themeColor + "; } .theme-highlight:hover { background-color: " + fnHexTransparent(0.12, themeColor) + "; } /* Fill and stroke for themeing SVGs */.theme-main-fill { fill: " + themeColor + "; } .theme-main-stroke { stroke: "+ themeColor + "; } /* classes for themeing buttons. */ .theme-main-btn { color:" + fnLightness(themeColor) + "; background-color: " + themeColor + "; } .theme-main-btn:hover { color:" + fnLightness(themeColor) + "; background-color: " + fnShadeBlendConvert(-0.13, themeColor) + "; } ::-moz-selection, ::selection { color: #333; background: " + fnHexTransparent(0.3, themeColor) + "; } .fsk h1,.fsk h2, .fsk h3, .fsk h4, .fsk h5, .fsk h6 { color: " + themeColor + "} .fsk-ink { background: " + fnHexTransparent(0.3, themeColor) + ";} .fsk-nav-footer a { color: " + fnShadeBlendConvert(-0.3, themeColor) + "; } .fsk-sub-nav-item .active, .fsk-menu-item .active { color: " + themeColor + "; border-right-color: " + themeColor + "; } .fsk-fab, .fsk-blot { background-color: " + fnShadeBlendConvert(-0.3, themeColor) + ";} .fsk-svg-node {fill: " + themeColor + "} .fsk-sub-navicon.is-triggered svg { fill: " + themeColor + "}";
+    var themeCSS = " /* Basic themeing classes (color, background-color, border-color) */ .theme-main { color: " + themeColor + "; } .theme-main-color { background-color: " + themeColor + "; } .theme-main-border { border-color: " + themeColor + "; } .theme-highlight:hover { background-color: " + fnHexTransparent(0.12, themeColor) + "; } /* Fill and stroke for themeing SVGs */.theme-main-fill { fill: " + themeColor + "; } .theme-main-stroke { stroke: "+ themeColor + "; } /* classes for themeing buttons. */ .theme-main-btn { color:" + fnLightness(themeColor) + "; background-color: " + themeColor + "; } .theme-main-btn:hover { color:" + fnLightness(themeColor) + "; background-color: " + fnShadeBlendConvert(-0.13, themeColor) + "; } ::-moz-selection, ::selection { color: #333; background: " + fnHexTransparent(0.3, themeColor) + "; } .fsk h1,.fsk h2, .fsk h3, .fsk h4, .fsk h5, .fsk h6 { color: " + themeColor + "} .fsk-ink { background: " + fnHexTransparent(0.3, themeColor) + ";} .fsk-nav-footer a { color: " + fnShadeBlendConvert(-0.3, themeColor) + "; } .fsk-sub-nav-item .active, .fsk-menu-item .active { color: " + themeColor + "; border-right-color: " + themeColor + "; } .fsk-svg-node { fill: " + themeColor + ";} .fsk-sub-navicon.is-triggered svg { fill: " + themeColor + "}";
 
 
     fs.writeFile('./styleguide/css/theme.css', themeCSS.toString() , function (err,data) {
