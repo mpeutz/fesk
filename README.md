@@ -63,11 +63,12 @@ Define section of the style sheet as chapters. These chapters are used to organi
 Section:        Number as chapter . section (e.g 1.2, 3.12, 11.3, etc.)
                 used to set the order of section appearance. (*required)
 Compatibility:  Browser compatiblity list. Comma delimited string with six items
-                (ie, firefox, chrome, , opera, ios, & andriod)
+                (ie, firefox, chrome, opera, ios, & android)
 Title:          Section name
 Type:           HTML - Type of section used to set template in styleguide.
                 This can be HTML, CSS, SCSS, LESS, or Color. (defaults to HTML)
 Tags:           Tags for organizing section. Comma delimited list.
+File:           File name, used to call out partials.
 Description:    Section description.
 Modifiers:      Use to set modifier classes on section.
                 (e.g. :hover - shows hover state,
