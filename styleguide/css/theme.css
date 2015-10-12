@@ -1,0 +1,11 @@
+/* Basic themeing classes (color, background-color, border-color) */
+.theme-main { color: #f44336}
+.theme-main-color { background-color: #f44336}
+.theme-main-border { border-color: #f44336}
+.theme-highlight:hover { background-color: #f44336}
+/* Fill and stroke for themeing SVGs */
+.theme-main-fill { fill: #f44336}
+.theme-main-stroke { stroke: #f44336 }
+/* classes for themeing buttons. */
+.theme-main-btn { color: #fff; background-color: #f44336}
+.theme-main-btn:hover { color:#fff;  background-color: #CF1B0C}

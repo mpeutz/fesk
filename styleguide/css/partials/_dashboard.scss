@@ -1,0 +1,32 @@
+.fsk-dash-meta {
+    margin-bottom: 1em;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .fsk-stat-value,
+    .fsk-stat-key {
+        font-size: 1.5em;
+        display: inline-block;
+        font-weight: 200;
+        flex: 0 1 auto;
+        }
+    }
+
+.fsk-dash-stats {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display:flex;
+    flex-direction: row;
+    align-content: stretch;
+    }
+
+.fsk-dash-item {
+    flex: 0 1 auto;
+    width: 25%;
+    text-align: center;
+    .fsk-stat-value {
+        font-size: 4em;
+        line-height: 1.25em;
+        }
+    }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="msgApp">
+<html lang="en" ng-app="fskApp">
 
 <head >
     <meta charset="utf-8" />
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0">
     <title ng-bind="{{data.message}} 'Styleguide - ' + $root.title">MyApp - Welcome</title>
     <meta name="description" content="" />
-    <meta name="generator" content="msg" />
+    <meta name="generator" content="fsk" />
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -16,7 +16,7 @@
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="MSG Starter Kit">
+    <meta name="apple-mobile-web-app-title" content="fsk Starter Kit">
     <link rel="apple-touch-icon-precomposed" href="../apple-touch-icon-precomposed.png">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
@@ -25,7 +25,8 @@
 
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="css/helperStyles.css" />
-    <link rel="stylesheet" href="css/msg.css" />
+    <link rel="stylesheet" href="css/fsk.css" />
+    <link rel="stylesheet" href="css/theme.css" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
 
     <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
@@ -44,32 +45,32 @@
 
 </head>
 
-<body id="msg-node" class="msg {{$root.title}}" ng-controller='titleCtrl'>
+<body id="fsk-node" class="fsk {{$root.title}}" ng-controller='titleCtrl'>
 
-    <div class="msg-container">
+    <div class="fsk-container">
 
         <!-- Main navigation used to traverse the sections and helper pages. -->
-        <aside class="msg-nav">
+        <aside class="fsk-nav">
             <nav ng-include src="'view/mainNav.html'"></nav>
-            <div class="msg-nav-footer"><a href="https://github.com/mpeutz/fesk">fesk styleguide</a> - 2015  |  ver: 0.1.0</div>
+            <div class="fsk-nav-footer"><a href="https://github.com/mpeutz/fesk">fesk styleguide</a> - 2015  |  ver: 0.1.0</div>
         </aside>
 
         <!-- Sub navigation used to traverse the components and isolated components. -->
-        <aside class="msg-subnav" ng-if="$root.title == 'component'">
+        <aside class="fsk-subnav" ng-if="$root.title == 'component'">
             <go-back></go-back>
         </aside>
-        <aside class="msg-subnav" ng-if="$root.title == 'search'">
+        <aside class="fsk-subnav" ng-if="$root.title == 'search'">
             <go-back></go-back>
             <nav ng-include src="'view/searchNav.html'"></nav>
         </aside>
-        <aside class="msg-subnav" ng-if="$root.title == 'section'">
+        <aside class="fsk-subnav" ng-if="$root.title == 'section'">
             <nav ng-include src="'view/subNav.html'"></nav>
         </aside>
 
 
 
         <!-- Content area -->
-        <div role="main" class="msg-main" id="msg-content" du-scroll-container>
+        <div role="main" class="fsk-main" id="fsk-content" du-scroll-container>
             <div ng-view class="content-animate"></div>
         </div>
 
@@ -79,9 +80,10 @@
     <div id="scriptcontainer">
         <script type="text/ng-template" id="userStyles.html">
             <style>
-                @import url('../dev/css/styles.css');
+                @import url('../css/styles.css');
                 @import url('css/helperStyles.css');
-                .msg-example-code {  font-family: inherit; }
+                .fsk-example-code {  font-family: inherit; }
+                .fsk-example-code * { white-space: initial; }
             </style>
         </script>
     </div>

@@ -18,9 +18,10 @@ module.exports = function styleGuide( opts ) {
         var chapterGuide = /^chapter:/i;
         var styleGuide = /^section:/i;
         var colorGuide = /^colors:/i;
+        var processGuide =/^process:|^processed:|^preprocessor:|^sass:|^scss:|^stylus:|^less|^stl/i;
 
         //Generate each of the styleGuide blocks
-        css.eachComment( function( comment ) {
+        css.walkComments( function( comment ) {
             node = comment.text;
 
 
@@ -100,7 +101,7 @@ module.exports = function styleGuide( opts ) {
                 styleJSON.push( chapterBlock );
 
                 // remove Chapter comments and replace with just chapter title and name
-                comment.replaceWith('/* ------------------------------------------------\r\n * ' + chapterBlock.group + ' - ' + chapterBlock.title + '\r\n * ------------------------------------------------ */').toString();
+                comment.replaceWith('/* ------------------------------------------------\r\n * ' + chapterBlock.group + '.............................' + chapterBlock.title + '\r\n * ------------------------------------------------ */').toString();
 
 
             }
@@ -117,7 +118,7 @@ module.exports = function styleGuide( opts ) {
                     reference: '',
                     type: '',
                     tags: [],
-                    file: filesource.match(/([\w -]+\.\w+)[^/]*$/g).toString(),
+                    file: '',
                     compatibility: [],
                     states: [],
                     description: '',
@@ -146,12 +147,53 @@ module.exports = function styleGuide( opts ) {
                     getCompatibility( property, styleBlock );
                     getDescription( property, styleBlock );
                     getNote( property, styleBlock );
+                    getFile( property, styleBlock );
                     getCodeStates( property, styleBlock );
 
                 }
                 styleJSON.push( styleBlock );
                 // remove Guide comments
-                comment.removeSelf();
+                comment.remove();
+            }
+
+            if ( node.match( processGuide ) ) {
+
+                //normalize the node string
+                node = node
+                    .replace( /--*-/g, '' )
+                    .replace( /(?:\\[rn]|[\r\n]+)+/g, "\r\n" )
+                    .replace( /\w+:/g, '^$&' );
+
+                // Use arbitrary character as delimiter
+                var process = node.split( "^" );
+
+                processorBlock = {
+                    order: '',
+                    group: '',
+                    reference: '',
+                    type: 'preprocessor',
+                    title: '',
+                    description: '',
+                    note: '',
+                    lang: '',
+                    vars: [],
+                    logic: ''
+                };
+
+                for ( var o = 0; o < process.length; o++ ) {
+                    var processorProp = process[ o ].toString();
+                    getTitle( processorProp, processorBlock );
+                    getDescription( processorProp, processorBlock );
+                    getprocessorRef( processorProp, processorBlock );
+                    getNote( processorProp, processorBlock );
+                    getprocessorLang( processorProp, processorBlock );
+                    getprocessorVars( processorProp, processorBlock );
+                    getprocesserCode( processorProp, processorBlock );
+                }
+                styleJSON.push( processorBlock );
+
+                // remove Colors comments
+                comment.remove();
             }
 
             if ( node.match( colorGuide ) ) {
@@ -185,7 +227,7 @@ module.exports = function styleGuide( opts ) {
                 styleJSON.push( colorBlock );
 
                 // remove Colors comments
-                comment.removeSelf();
+                comment.remove();
             }
 
 
@@ -196,7 +238,7 @@ module.exports = function styleGuide( opts ) {
 
         // Find selectors and calculate specificity
         var counter = 0;
-        css.eachRule( function( rule ) {
+        css.walkRules( function( rule ) {
             for(var n = 0; n < rule.selectors.length; n++) {
             specificityBlock = {
                 specificity: '',
@@ -231,14 +273,14 @@ module.exports = function styleGuide( opts ) {
         } );
 
         // Build the TOC and insert it at the top of the stylesheet
-        css.eachComment( function( comment ) {
+        css.walkComments( function( comment ) {
             node = comment.text;
             if ( node.match( /^title:/i ) ) {
                 comment.text = node + '\r\n' + tocArray.toString().replace(/\,/gi,'').replace( /^\s+|\s+$/, '', 0 );
             }
             if ( node.match( metaGuide ) ) {
                 comment.cloneAfter().replaceWith('/* ------------------------------------------------\r\n' + tocArray.toString().replace(/\,/gi,'').replace( /\r\n/g, '\r\n * ' ).replace( /(TABLE OF CONTENT:)/g, ' * TABLE OF CONTENT:' ) + ' ------------------------------------------------ */');
-                comment.removeSelf();
+                comment.remove();
             }
         });
 
@@ -312,6 +354,45 @@ getColorList = function( prop, data ) {
     }
 };
 
+getprocessorRef = function( prop, data ) {
+    if ( hasPrefix( prop, 'process' ) || hasPrefix( prop, 'processor' ) || hasPrefix( prop, 'sass' ) || hasPrefix( prop, 'scss' )) {
+        var subprop = prop.replace( /^\s*?[a-z ]+\:\s+?/i, '' );
+        data.order = singleLine( subprop );
+        data.group = singleLine( subprop.replace( /[\^.]+\d/, '' ) );
+        data.reference = singleLine( subprop.replace( /\d*\./, '' ) );
+    }
+};
+
+
+getprocessorLang = function( prop, data ) {
+    if ( hasPrefix( prop, 'lang' ) || hasPrefix( prop, 'language' ) ) {
+        data.lang = singleLine( prop.replace( /^\s*?[a-z ]+\:\s+?/i, '' ) );
+    }
+};
+
+getprocessorVars = function( prop, data ) {
+    if ( hasPrefix( prop, 'vars' ) || hasPrefix( prop, 'var' ) ) {
+        var subprop = prop.replace( /^\s*?[a-z ]+\:\s+?/i, '' );
+        var vari = subprop.split( /~~~/ );
+        for ( var a = 0; a < vari.length; a++ ) {
+            varGroup = {
+                title: '',
+                use: ''
+            };
+            var varis = vari[ a ].match( /[^\r\n]+/g );
+            varGroup.title = varis[ 0 ];
+            varGroup.use = varis[ 1 ];
+            data.vars.push( varGroup );
+        }
+    }
+};
+
+getprocesserCode = function( prop, data ) {
+    if ( hasPrefix( prop, 'logic' ) || hasPrefix( prop, 'logic' ) || hasPrefix( prop, 'mixin' ) || hasPrefix( prop, 'function' ) ) {
+        data.logic = singleLine( prop.replace( /^\s*?[a-z ]+\:\s+?/i, '' ) + "{ ... }" );
+    }
+};
+
 getRef = function( prop, data ) {
     if ( hasPrefix( prop, 'section' ) ) {
         var subprop = prop.replace( /^\s*?[a-z ]+\:\s+?/i, '' );
@@ -320,6 +401,8 @@ getRef = function( prop, data ) {
         data.reference = singleLine( subprop.replace( /\d*\./, '' ) );
     }
 };
+
+
 
 getTitle = function( prop, data ) {
     if ( hasPrefix( prop, 'title' ) || hasPrefix( prop, 'guide' ) ) {
@@ -373,6 +456,17 @@ getURL = function( prop, data ) {
         data.url = singleLine( prop.replace( /^\s*?[a-z ]+\:\s+?/i, '' ) );
     }
 };
+
+getFile = function( prop, data ) {
+    if ( hasPrefix( prop, 'file' ) ) {
+        var fileref = prop.replace( /^\s*?[a-z ]+\:\s+?/i, '' );
+        if (fileref === undefined) {
+            fileref = filesource.match(/([\w -]+\.\w+)[^/]*$/g).toString();
+        }
+        data.file = fileref;
+    }
+};
+
 
 getTags = function( prop, data ) {
     if ( hasPrefix( prop, 'tags' ) ) {
@@ -550,38 +644,54 @@ calcSpecificity = function( data ) {
 
 // Statistics function
 calcStats = function( data ) {
-    var rules = 0;
-    selectors = [],
-        declarations = 0,
-        atRules = 0,
-        uAtRules = [],
-        color = 0,
-        uColor = [],
-        backgroundColor = 0,
-        uBackgroundColor = [],
-        fontSize = 0,
-        uFontSize = [],
-        uFontFamily = [],
-        height = 0,
-        width = 0,
-        float = 0;
+    var fs = require( "fs" );
+    var
+        fileSize            = 0,
+        published           = 0,
+        rules               = 0,
+        selectors           = [],
+        ids                 = 0,
+        universal           = 0,
+        declarations        = 0,
+        atRules             = 0,
+        uAtRules            = [],
+        color               = 0,
+        uColor              = [],
+        backgroundColor     = 0,
+        uBackgroundColor    = [],
+        fontSize            = 0,
+        uFontSize           = [],
+        uFontFamily         = [],
+        height              = 0,
+        width               = 0,
+        float               = 0,
+        important           = 0;
 
 
     function onlyUnique( value, index, self ) {
         return self.indexOf( value ) === index;
     }
 
-    data.eachAtRule( function( rule ) {
+    data.walkAtRules( function( rule ) {
         atRules++;
         uAtRules.push( rule.params );
     } );
 
-    data.eachRule( function( rule ) {
+    data.walkRules( function( rule ) {
         rules++;
         selectors.push( rule.selector );
+        for ( var sl = 0; sl < rule.selectors.length; sl++ ) {
+            if (rule.selectors[sl].match(/#[a-zA-Z0-9-]*/gi)) {
+                ids++;
+            }
+
+            if (rule.selectors[sl].match(/\*/gi)) {
+                universal++;
+            }
+        }
     } );
 
-    data.eachDecl( function( decl ) {
+    data.walkDecls( function( decl ) {
         declarations++;
         if ( decl.prop == 'color' ) {
             color++;
@@ -607,12 +717,19 @@ calcStats = function( data ) {
         if ( decl.prop == 'float' ) {
             float++;
         }
+        if ( decl.important ) {
+            important++;
+        }
     } );
     var selects = selectors.toString();
 
     return {
+        fileSize: "00 KBs",
+        publish: "12/31/2014",
         ruleCount: rules,
         selectorCount: selects.split( ',' ).length,
+        idCount: ids,
+        universalCount: universal,
         declorationCount: declarations,
         mediaQuerieCount: atRules,
         uniqueMediaQueries: uAtRules.filter( onlyUnique ),
@@ -625,7 +742,8 @@ calcStats = function( data ) {
         uniqueFontFamily: uFontFamily.filter( onlyUnique ),
         widthCount: width,
         heightCount: height,
-        floatCount: float
+        floatCount: float,
+        importantCount: important
     };
 };
 
@@ -643,8 +761,6 @@ function drawSVG (spec) {
     var points =[];
     var nodes = [];
 
-        console.log(halfStep);
-
     for (i = 1; i < spec.length; i++) {
         var curr = steps * (i - 1);
         var currHalf = curr + halfStep
@@ -658,11 +774,11 @@ function drawSVG (spec) {
 
         var currSel = spec[i].selector.toString().replace(/"/g, "'");
 
-        nodes.push('<g class="msg-svg-group"><rect x="' + curr + '" y="0" width="' + steps +'" height="100%"  style="cursor: pointer; fill: rgba(255, 0 ,0,0);" onmouseover="changeText(' + spec[i].rank + ', \'' + currSel + '\', ' + spec[i].line + ', \'' + spec[i].from.toString() + '\')" /><circle class="msg-svg-node" cx="' + currHalf + '" cy="' + rank + '" r="3"/></g>');
+        nodes.push('<g class="fsk-svg-group"><rect x="' + curr + '" y="0" width="' + steps +'" height="100%"  style="cursor: pointer; fill: rgba(255, 0 ,0,0);" onmouseover="changeText(' + spec[i].rank + ', \'' + currSel + '\', ' + spec[i].line + ', \'' + spec[i].from.toString() + '\')" /><circle class="fsk-svg-node" cx="' + currHalf + '" cy="' + rank + '" r="3"/></g>');
     }
 
 
-    var specSVG = '<?xml-stylesheet type="text/css" href="../css/msg.css" ?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + svgWidth + ' ' +  svgHeight + '" onload="init()"><script><![CDATA[var text, textSpec, textSel, textFile, textLine;function init(){textSpec = document.getElementById("textSpec");textSel = document.getElementById("textSel");textFile = document.getElementById("textFile");textLine = document.getElementById("textLine");}function changeText(spec,sel,line,from){textSpec.textContent = spec;textSel.textContent = sel;textFile.textContent = from;textLine.textContent = line};function restoreText(){textSpec.textContent = "00"};]]></script><style>.msg-svg-node{display:none; stroke:#555;stroke-width:1px;fill:#992053;cursor:pointer;}.msg-svg-path{fill:none;stroke:#555;stroke-width:2px;} .msg-svg-group { position: relative; } .msg-svg-group:hover .msg-svg-node {display:block;} .msg-svg-group:hover .msg-svg-dotted {display: block;}</style><path style="stroke:#000;" d="M0,' + (svgHeight - 3) + ' L' + svgWidth + ',' + (svgHeight - 3) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 53) + ' L' + svgWidth + ',' + (svgHeight - 53) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 103) + ' L' + svgWidth + ',' + (svgHeight - 103) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 153) + ' L' + svgWidth + ',' + (svgHeight - 153) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 203) + ' L' + svgWidth + ',' + (svgHeight - 203) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 253) + ' L' + svgWidth + ',' + (svgHeight - 253) + '"></path><path id="svgPath" class="msg-svg-path" d="' + points.join('') + '"></path>' + nodes.join('') + '<text transform="translate(10 24)" fill="#555" font-family="sans-serif" font-size="24" id="textSpec">--</text><text transform="translate(10 40)" fill="#444" font-family="sans-serif" font-size="10" id="textSel">null</text><text transform="translate(55 20)" fill="#666" font-family="sans-serif" font-size="10">line: </text><text transform="translate(75 20)" fill="#444" font-family="sans-serif" font-size="10" id="textLine">--</text><text transform="translate(100 20)" fill="#666" font-family="sans-serif" font-size="10">file: </text><text transform="translate(120 20)" fill="#444" font-family="sans-serif" font-size="10" id="textFile">null</text></svg>';
+    var specSVG = '<?xml-stylesheet type="text/css" href="../css/fsk.css" ?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + svgWidth + ' ' +  svgHeight + '" onload="init()"><script><![CDATA[var text, textSpec, textSel, textFile, textLine;function init(){textSpec = document.getElementById("textSpec");textSel = document.getElementById("textSel");textFile = document.getElementById("textFile");textLine = document.getElementById("textLine");}function changeText(spec,sel,line,from){textSpec.textContent = spec;textSel.textContent = sel;textFile.textContent = from;textLine.textContent = line};function restoreText(){textSpec.textContent = "00"};]]></script><style>.fsk-svg-node{display:none; stroke:#555;stroke-width:1px;fill:#992053;cursor:pointer;}.fsk-svg-path{fill:none;stroke:#555;stroke-width:2px;} .fsk-svg-group { position: relative; } .fsk-svg-group:hover .fsk-svg-node {display:block;} .fsk-svg-group:hover .fsk-svg-dotted {display: block;}</style><path style="stroke:#000;" d="M0,' + (svgHeight - 3) + ' L' + svgWidth + ',' + (svgHeight - 3) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 53) + ' L' + svgWidth + ',' + (svgHeight - 53) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 103) + ' L' + svgWidth + ',' + (svgHeight - 103) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 153) + ' L' + svgWidth + ',' + (svgHeight - 153) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 203) + ' L' + svgWidth + ',' + (svgHeight - 203) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 253) + ' L' + svgWidth + ',' + (svgHeight - 253) + '"></path><path id="svgPath" class="fsk-svg-path" d="' + points.join('') + '"></path>' + nodes.join('') + '<text transform="translate(10 24)" fill="#555" font-family="sans-serif" font-size="24" id="textSpec">--</text><text transform="translate(10 40)" fill="#444" font-family="sans-serif" font-size="10" id="textSel">null</text><text transform="translate(55 20)" fill="#666" font-family="sans-serif" font-size="10">line: </text><text transform="translate(75 20)" fill="#444" font-family="sans-serif" font-size="10" id="textLine">--</text><text transform="translate(100 20)" fill="#666" font-family="sans-serif" font-size="10">file: </text><text transform="translate(120 20)" fill="#444" font-family="sans-serif" font-size="10" id="textFile">null</text></svg>';
 
     return specSVG;
  }

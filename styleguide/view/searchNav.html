@@ -1,8 +1,8 @@
-<ul class="msg-sub-nav-list" du-spy-contex du-scroll-container="msg-content">
-    <li class="msg-sub-nav-item repeat-animation" ng-repeat="sec in msg | filter:$parent.searched.val" >
+<ul class="fsk-sub-nav-list" du-spy-contex du-scroll-container="fsk-content">
+    <li class="fsk-sub-nav-item repeat-animation" ng-repeat="sec in fsk | filter:$parent.searched.val" >
         <a href="#{{ sec.title | flatten}}" du-scrollspy du-smooth-scroll offset="80">
-            <span class="msg-name">{{sec.title}}</span>
-            <span class="msg-ref">{{sec.order}}</span>
+            <span class="fsk-name">{{sec.title}}</span>
+            <span class="fsk-ref">{{sec.order}}</span>
         </a>
     </li>
 </ul>

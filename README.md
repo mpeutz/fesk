@@ -1,3 +1,5 @@
+This is still in alpha stage.
+
 
 # fesk
 
@@ -11,6 +13,8 @@ This plugin currently lacks tests.
 Documentation to come
 
 ## Install
+
+Currently this package is not in npm. I'm still working out some of the details before it is submitted. However, if you want to play with it you can install directly from this repository.
 
 ```
 npm install git://github.com/mpeutz/fesk.git

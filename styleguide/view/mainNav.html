@@ -1,36 +1,36 @@
-<div class="msg-header">
-    <input id="searchText" class="msg-search" type="text" ng-model="searched.val" search-input/>
-    <div class="msg-header-title">{{msg[0].client}} Styleguide</div>
-    <div class="msg-search-icon">
+<div class="fsk-header">
+    <input id="searchText" class="fsk-search" type="text" ng-model="searched.val" search-input/>
+    <div class="fsk-header-title">{{fsk[0].client}} Styleguide</div>
+    <div class="fsk-search-icon">
         <div svg-icon icon="search"></div>
     </div>
-    <div class="msg-clear-icon msg-clear">
+    <div class="fsk-clear-icon fsk-clear">
         <div svg-icon icon="close"></div>
     </div>
 </div>
-<ul class="msg-menu">
-    <li class="msg-menu-item">
-        <a href="#/" ng-class="{ active: isActive('/') }">
-            <span class="msg-name">Guidelines</span>
-            <span class="msg-ref">A</span>
+<ul class="fsk-menu">
+    <li class="fsk-menu-item">
+        <a href="#/" ng-class="{ active: isActive('/') }" fsk-ripple>
+            <span class="fsk-name">Guidelines</span>
+            <span class="fsk-ref">A</span>
         </a>
     </li>
-    <li class="msg-menu-item">
-        <a href="#/dashboard" ng-class="{ active: isActive('/dashboard') }">
-            <span class="msg-name">Dashboard - βeta</span>
-            <span class="msg-ref">B</span>
+    <li class="fsk-menu-item">
+        <a href="#/dashboard" ng-class="{ active: isActive('/dashboard') }" fsk-ripple>
+            <span class="fsk-name">Dashboard - βeta</span>
+            <span class="fsk-ref">B</span>
         </a>
     </li>
-    <li class="msg-menu-item">
-        <a href="#/changelog" ng-class="{ active: isActive('/changelog') }">
-            <span class="msg-name">Change Log</span>
-            <span class="msg-ref">C</span>
+    <li class="fsk-menu-item">
+        <a href="#/changelog" ng-class="{ active: isActive('/changelog') }" fsk-ripple>
+            <span class="fsk-name">Change Log</span>
+            <span class="fsk-ref">C</span>
         </a>
     </li>
-    <li class="msg-menu-item" ng-repeat="navi in msg | filter: isOneDeep">
-        <a href="#/{{navi.group}}" ng-class="{ active: isActive('/{{navi.group}}') }">
-            <span class="msg-name">{{navi.title}}</span>
-            <span class="msg-ref">{{navi.order}}</span>
+    <li class="fsk-menu-item" ng-repeat="navi in fsk | filter: isOneDeep">
+        <a href="#/{{navi.group}}" ng-class="{ active: isActive('/{{navi.group}}') }" fsk-ripple>
+            <span class="fsk-name">{{navi.title}}</span>
+            <span class="fsk-ref">{{navi.order}}</span>
         </a>
     </li>
 </ul>

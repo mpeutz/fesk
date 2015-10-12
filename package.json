@@ -1,6 +1,6 @@
 {
   "name": "fesk",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "FESK (Front-end Starter Kit) is a simple web starter kit",
   "main": "fesk.js",
   "scripts": {
@@ -11,6 +11,8 @@
     "url": "git+https://github.com/mpeutz/fesk.git"
   },
   "keywords": [
+    "front end",
+    "starter kit",
     "starter",
     "kit",
     "styleguide",
@@ -28,8 +30,10 @@
   "devDependencies": {
     "cpr": "^0.4.1",
     "cssnext": "^1.8.4",
+    "inquirer": "^0.9.0",
     "mkdirp": "^0.5.1",
-    "ncp": "^2.0.0",
+    "autoprefixer-core": "^5.2.1",
+    "postcss": "^5.0.0",
     "path": "^0.11.14",
     "wrench": "^1.5.8",
     "yargs": "^3.23.0"

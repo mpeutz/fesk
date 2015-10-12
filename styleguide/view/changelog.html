@@ -1,17 +1,20 @@
-<div class="msg-content-area">
-    <h1>Change Log</h1>
+<div class="fsk-content-area">
+    <h1 class="fsk-changelog_title">Change Log</h1>
+    <div class="fsk-changelog_order" fsk-clorder>newest first</div>
 
-    <ul class="msg-changlog" >
-    <li class="msg-changlog_item" ng-repeat="cl in changelog" >
+    <div class="fsk-changlog" >
+    <div class="fsk-changlog_item" ng-repeat="cl in changelog" >
 
-            <div class="msg-changlog_version">
-                <span class="msg-changelog_text">Version: </span>
-                <span class="msg-changlelog_number"> {{cl.version}}</span>
+            <div class="fsk-changlog_version">
+                <span class="fsk-changelog_text">Version: </span>
+                <span class="fsk-changelog_number theme-main"> {{cl.version}}</span>
             </div>
-            <div class="msg-changelog_comment">{{cl.comment}}</div>
-            <div class="msg-changelog_date">{{cl.date}}</div>
-            <hr/>
+            <div class="fsk-changelog_comment">{{cl.comment}}</div>
+            <div class="fsk-changelog_date">
+                <div class="fsk-changelog_days">{{cl.date |  date:"MM/dd/yyyy"}}</div>
+                <div class="fsk-changelog_time">{{cl.date |  date:"hh:mm a"}}</div>
+            </div>
 
-    </li>
-</ul>
+    </div>
+</div>
 </div>

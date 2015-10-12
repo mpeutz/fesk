@@ -6,7 +6,7 @@ Fesk (Front End Starter Kit) is meant to be used as a living styleguide, documen
 
 ### Enhanced - KSS
 
-Fesk Styleguide is based on KSS (Knyle Style Sheets). KSS a documentation syntax for stylesheets is an awesome tool but lacked some features that a living styleguide needs. Fesk takes the format that KSS started and expands on it. It includes "browser compatibility", "notes", "preproccessor mixin, function and variable documentation", "color chips" and "animations". Furthermore Fesk has implemented a change log, and simple stylesheet statistics dashboard, and versioning.
+Fesk Styleguide is based on KSS (Knyle Style Sheets). KSS a documentation syntax for stylesheets is an awesome tool but lacked some features that a living styleguide needs. Fesk takes the format that KSS started and expands on it. It includes "browser compatibility", "notes", "preproccessor mixin, function and variable references", "color chips" and "fonts". Furthermore Fesk has implemented a change log, and simple stylesheet statistics dashboard, and versioning.
 
 ### How it works
 Each section in the guide is a defined by a block comment within the css file. The comment consists of key/value pairs with are used to generate the living styleguide. The styleguide is powered by angularjs parsing the key/value pairs.
@@ -59,6 +59,28 @@ Modifiers:      Use to set modifier classes on section.
                 .red - changes button to red color)
 Note:           Any notes related to section.
 Code:           HTML/markup to show styles.
+*/
+```
+
+#### Preprocessor
+Define colors within your styleguide. Must start with "process:".
+
+```
+/*
+Process:        Number as chapter . section (e.g 1.2, 3.12, 11.3, etc.)
+                used to set the order of section appearance. (*required)
+Title:          Name of color section
+Description:    Description of color section
+Lang:           Preprocessor language
+Note:           Add notes aboutr mixin/function
+Var:            List of variables: $vaiable, and use.
+                This list is separated by three tildes ~~~
+                $main-color
+                Uses the main color
+                ~~~
+                $margin-top
+                Sets the top margin space
+logic:          Show some or all of the mixin/function
 */
 ```
 

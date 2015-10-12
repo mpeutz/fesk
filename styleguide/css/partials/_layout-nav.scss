@@ -1,4 +1,4 @@
-.msg-container {
+.fsk-container {
     width: 100vw;
     max-width: 100%;
     height: 100vh;
@@ -6,8 +6,8 @@
     background-color: #ededed;
 }
 
-.msg-nav,
-.msg-subnav {
+.fsk-nav,
+.fsk-subnav {
     position: fixed;
     top: 0;
 
@@ -20,14 +20,14 @@
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.4);
 }
 
-.msg-nav {
+.fsk-nav {
     z-index: 10;
     left: 0;
 
     background-color: #171d25;
 }
 
-.msg-nav-footer {
+.fsk-nav-footer {
     font-size: 0.7vw;
 
     position: absolute;
@@ -44,12 +44,11 @@
     background-color: #171d25;
 }
 
-.msg-nav-footer a {
-    color: color(var(--main-color) shade(30%));
+.fsk-nav-footer a {
     font-size: 0.7vw;
 }
 
-.msg-subnav {
+.fsk-subnav {
     z-index: 9;
     left: 16%;
 
@@ -75,6 +74,6 @@
     width: 68%;
 }
 
-.msg-content-area {
+.fsk-content-area {
     padding: 2em;
 }

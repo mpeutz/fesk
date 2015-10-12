@@ -1,4 +1,4 @@
-.msg-main {
+.fsk-main {
     position: relative;
 
     overflow-x: hidden;
@@ -33,7 +33,7 @@
 
     opacity: 1;
 
-    filter: url('#motionBlur');
+    //filter: url('#motionBlur');
 }
 
 .content-animate.ng-leave {
@@ -49,32 +49,32 @@
 
     opacity: 0;
 
-    filter: url('#motionBlur');
+    //filter: url('#motionBlur');
 }
 
-.msg-container {
+.fsk-container {
     position: relative;
 
     height: 100vh;
 }
 
-.msg-subnav.ng-enter,
-.msg-subnav.ng-leave {
+.fsk-subnav.ng-enter,
+.fsk-subnav.ng-leave {
     -webkit-transition: 0.25s all cubic-bezier(0.215, 0.61, 0.355, 1);
             transition: 0.25s all cubic-bezier(0.215, 0.61, 0.355, 1);
     transform: translateX(0);
 }
 
-.msg-subnav.ng-enter {
+.fsk-subnav.ng-enter {
     transform: translateX(-100%);
 }
 
-.msg-subnav.ng-leave,
-.msg-subnav.ng-enter.ng-enter-active {
+.fsk-subnav.ng-leave,
+.fsk-subnav.ng-enter.ng-enter-active {
     transform: translateX(0);
 }
 
-.msg-subnav.ng-leave.ng-leave-active {
+.fsk-subnav.ng-leave.ng-leave-active {
     transform: translateX(-100%);
 }
 
@@ -108,7 +108,7 @@
 
     opacity: 0;
 
-    filter: url('#motionBlur');
+    //filter: url('#motionBlur');
 }
 
 .repeat-animation.ng-leave,
@@ -118,10 +118,10 @@
 
     opacity: 1;
 
-    filter: url('#motionBlur');
+    //filter: url('#motionBlur');
 }
 
-.msg-markup-container {
+.fsk-markup-container {
     position: relative;
     top: 0;
 
@@ -132,11 +132,12 @@
     transition: max-height 0.5s ease-out;
 }
 
-.msg-markup-container.ng-hide {
+.fsk-markup-container.ng-hide {
     max-height: 0;
 }
 
-.msg-markup-container.ng-hide-add,
-.msg-markup-container.ng-hide-remove {
+.fsk-markup-container.ng-hide-add,
+.fsk-markup-container.ng-hide-remove {
     display: block;
 }
+

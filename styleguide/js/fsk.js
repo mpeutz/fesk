@@ -1,9 +1,9 @@
 (function() {
-  var MsgStateGenerator;
+  var fskStateGenerator;
 
-  MsgStateGenerator = (function() {
+  fskStateGenerator = (function() {
 
-    function MsgStateGenerator() {
+    function fskStateGenerator() {
       var idx, idxs, pseudos, replaceRule, rule,  _i, _len, _len2, _ref, _ref2;
       pseudos = /(\:hover|\:disabled|\:active|\:visited|\:focus)/g;
 
@@ -31,7 +31,7 @@
 
     }
 
-    MsgStateGenerator.prototype.insertRule = function(rule) {
+    fskStateGenerator.prototype.insertRule = function(rule) {
       var headEl, styleEl;
       headEl = document.getElementById('userStyles.html');
       styleEl = document.createElement('style');
@@ -44,12 +44,12 @@
       return headEl.appendChild(styleEl);
     };
 
-    return MsgStateGenerator;
+    return fskStateGenerator;
 
   })();
 
  window.onload = function(){
-  new MsgStateGenerator();
+  new fskStateGenerator();
 };
 
 }).call(this);

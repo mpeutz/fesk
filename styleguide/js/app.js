@@ -1,7 +1,7 @@
-var msgApp = angular.module( 'msgApp', [ 'ngRoute', 'ngSanitize', 'ngAnimate', 'duScroll'] );
+var fskApp = angular.module( 'fskApp', [ 'ngRoute', 'ngSanitize', 'ngAnimate', 'duScroll'] );
 
 
-msgApp.config( function( $interpolateProvider, $routeProvider ) {
+fskApp.config( function( $interpolateProvider, $routeProvider ) {
 
 
     $routeProvider.when( '/', {
@@ -42,19 +42,19 @@ msgApp.config( function( $interpolateProvider, $routeProvider ) {
 
 
 //Set title for each page.
-msgApp.run( function( $rootScope, $route ) {
+fskApp.run( function( $rootScope, $route ) {
     $rootScope.$on( '$routeChangeSuccess', function( newRoute, oldRoute ) {
         $rootScope.title = $route.current.title;
     } );
 } );
 
-msgApp.controller( 'titleCtrl', function( $scope, $location, $http, $routeParams, $sce, $document, msg, stats, changelog ) {
+fskApp.controller( 'titleCtrl', function( $scope, $location, $http, $routeParams, $sce, $document, fsk, stats, changelog ) {
 
 
-    $scope.msg = {};
-    var promise = msg.getStyles();
+    $scope.fsk = {};
+    var promise = fsk.getStyles();
     promise.then( function( data ) {
-        $scope.msg = data;
+        $scope.fsk = data;
     } );
 
     $scope.stats = {};
@@ -69,7 +69,7 @@ msgApp.controller( 'titleCtrl', function( $scope, $location, $http, $routeParams
         $scope.changelog = data;
     } );
 
-    var container = angular.element( document.getElementById( 'msg-content' ) );
+    var container = angular.element( document.getElementById( 'fsk-content' ) );
     $scope.toTheTop = function() {
         container.scrollTop( 0, 500 );
     };
@@ -82,37 +82,37 @@ msgApp.controller( 'titleCtrl', function( $scope, $location, $http, $routeParams
         return $sce.trustAsHtml( htmlCode );
     };
 
-    $scope.isOneDeep = function( msg ) {
-        return msg.reference === '0';
+    $scope.isOneDeep = function( fsk ) {
+        return fsk.reference === '0';
     };
 
 
 
     if ( $routeParams.section ) {
         $scope.categoryGroup = function() {
-            return function( msg ) {
-                return msg.group === $routeParams.section;
+            return function( fsk ) {
+                return fsk.group === $routeParams.section;
             };
         };
     }
 
     if ( $routeParams.component ) {
         $scope.categoryGroup = function() {
-            return function( msg ) {
-                return msg.order === $routeParams.component;
+            return function( fsk ) {
+                return fsk.order === $routeParams.component;
             };
         };
     }
 
     $scope.sectionGroup = function() {
-        return function( msg ) {
-            return msg.group === $routeParams.section;
+        return function( fsk ) {
+            return fsk.group === $routeParams.section;
         };
     };
 
     $scope.headerGroup = function() {
-        return function( msg ) {
-            return msg.reference === $routeParams.section;
+        return function( fsk ) {
+            return fsk.reference === $routeParams.section;
         };
     };
 
@@ -145,13 +145,13 @@ msgApp.controller( 'titleCtrl', function( $scope, $location, $http, $routeParams
 
 } );
 
-msgApp.filter( 'flatten', function() {
+fskApp.filter( 'flatten', function() {
     return function( obj ) {
         return obj.replace( /\s+/g, '-' ).toLowerCase();
     };
 } );
 
-msgApp.filter( 'cleaned', function() {
+fskApp.filter( 'cleaned', function() {
         return function( obj ) {
             if (obj) {
                 return obj.toString().replace( /\,/g, '' );
@@ -159,7 +159,7 @@ msgApp.filter( 'cleaned', function() {
         };
 } );
 
-msgApp.filter('inArray', function() {
+fskApp.filter('inArray', function() {
     return function(array, value) {
         if(array) {
             return array.indexOf(value) !== -1;
@@ -168,14 +168,14 @@ msgApp.filter('inArray', function() {
 });
 
 
-angular.module( "msgApp" ).directive( "msgComponent", function() {
+angular.module( "fskApp" ).directive( "fskComponent", function() {
     return {
         restrict: "E",
         templateUrl: "view/component-card.html"
     };
 } );
 
-angular.module( "msgApp" ).directive( "goBack", function() {
+angular.module( "fskApp" ).directive( "goBack", function() {
     return {
         restrict: "E",
         link: function( scope, elem ) {
@@ -183,33 +183,155 @@ angular.module( "msgApp" ).directive( "goBack", function() {
                 $( '#searchText' ).val( '' );
             } );
         },
-        template: "<div class='msg-back'><button class='msg-back-button' onclick='window.history.back()'><svg class='msg-icon'><use xlink:href='#back' /></svg></button></div>"
+        template: "<div class='fsk-back'><button class='fsk-back-button' onclick='window.history.back()'><svg class='fsk-icon'><use xlink:href='#back' /></svg></button></div>"
     };
 } );
 
-angular.module("msgApp").directive("copyMarkup", function() {
+angular.module("fskApp").directive("fskRipple", function() {
     return {
-        restrict: "A",
-        link: function(scope, elem) {
-            var btn = elem[0];
-            btn.addEventListener("click", clickHandler, false);
-            btn.addEventListener("copy", copyHandler, false);
+        restrict: "AC",
+        link: function( scope, elem, attrs ) {
 
-            function clickHandler(e) {
-              e.target.dispatchEvent(new ClipboardEvent("copy"));
-            }
+            var parent, ink, d, x, y;
+            $(elem).click(function(e){
+                if ($(elem).hasClass('fsk-btn')|| $(elem).hasClass('fsk-contain')) {
+                    parent = $(elem);
+                    } else {
+                    parent = $(elem).parent();
+                }
+                if(parent.find(".fsk-ink").length === 0)
+                    parent.prepend("<span class='fsk-ink'></span>");
 
-            function copyHandler(e) {
-              e.clipboardData.setData("text/plain", "Simulated copy. Yay!");
+                ink = parent.find(".fsk-ink");
+                ink.removeClass("animate");
 
-              // CRITICAL: Must call `preventDefault();` to get this data into the system/desktop clipboard!!!
-              e.preventDefault();
-            }
+                //set size of .ink
+                if(!ink.height() && !ink.width())
+                {
+                    d = Math.max(parent.outerWidth(), parent.outerHeight());
+                    ink.css({height: d, width: d});
+                }
+
+                x = e.pageX - parent.offset().left - ink.width()/2;
+                y = e.pageY - parent.offset().top - ink.height()/2;
+
+                //set the position and add class .animate
+                ink.css({top: y+'px', left: x+'px'}).addClass("animate");
+            });
         }
     };
 });
 
-angular.module( "msgApp" ).directive( "searchInput", function( $interval ) {
+angular.module("fskApp").directive("fskAccordion", function() {
+    return {
+        restrict: "C",
+        link: function( scope, elem, attrs ) {
+
+                $(elem).on('click', function (e) {
+                    //find clicked accordion trigger
+                    var $trigger = $(e.target).closest('.fsk-accordion-trigger');
+                    if ($(e.target).hasClass('fsk-accordion-trigger')) {
+                        if ($trigger.hasClass('is-expanded')) {
+                            $(elem).find('.is-triggered').removeClass('is-triggered').stop().slideUp(500);
+                            $trigger.removeClass('is-expanded');
+                        } else {
+                            e.stopPropagation();
+                            var $target = "." + $trigger.attr('data-target');
+                            opener($trigger, $target);
+                            }
+                        }
+                    });
+
+            function opener(trigger, target) {
+                $(elem).find('.is-triggered').removeClass('is-triggered').stop().slideUp(350);
+                $(elem).find('.is-expanded').removeClass('is-expanded');
+                $(target).addClass('is-triggered');
+                trigger.addClass('is-expanded');
+                $(elem).find(target).stop().slideDown(200);
+            }
+        }
+
+    };
+});
+
+angular.module("fskApp").directive("fskOpen", function() {
+    return {
+        restrict: "C",
+        link: function( scope, elem, attrs ) {
+
+            $(elem).on('click', function () {
+                var $target = $(this).attr('data-target');
+
+
+                    if (!$(this).hasClass('is-triggered')) {
+                        $('.fsk-content-area').find('.is-triggered').removeClass('is-triggered').stop().slideUp(350);
+                        $('.fsk-content-area').find('.is-expanded').removeClass('is-expanded');
+                        $('.fsk-sub-nav-heading').find('.is-triggered').removeClass('is-triggered');
+                        $(this).addClass('is-triggered');
+                        $('.fsk-content-area').find('[data-target="' + $target + '"]').addClass('is-expanded');
+                        $("." + $target).addClass('is-triggered').stop().slideDown(350);
+                    } else {
+                        $(this).removeClass('is-triggered');
+                        $('.fsk-content-area').find('[data-target="' + $target + '"]').removeClass('is-expanded');
+                        $("." + $target).removeClass('is-triggered').stop().slideUp(350);
+                    }
+                });
+        }
+    };
+});
+
+angular.module("fskApp").directive("copyMarkup", function() {
+    return {
+        restrict: "A",
+        link: function(scope, elem) {
+
+            function whichAnimationEvent(){
+                var t;
+                var el = document.createElement('fakeelement');
+                var animations = {
+                  'animation':'animationend',
+                  'OAnimation':'oAnimationEnd',
+                  'MozAnimation':'animationend',
+                  'WebkitAnimation':'webkitAnimationEnd'
+                }
+
+                for(t in animations){
+                    if( el.style[t] !== undefined ){
+                        return animations[t];
+                    }
+                }
+            }
+
+
+            var btn = elem[0];
+            var input = btn.getElementsByTagName("textarea");
+             btn.addEventListener("click", function(event) {
+            var domelem = btn.parentElement;
+
+              event.preventDefault();
+              input[0].select(); // Select the input node's contents
+              var succeeded;
+              try {
+                // Copy it to the clipboard
+                succeeded = document.execCommand("copy");
+              } catch (e) {
+                succeeded = false;
+              }
+              if (succeeded) {
+                domelem.classList.add("succeed");
+                var animationEvent = whichAnimationEvent();
+                animationEvent && domelem.addEventListener(animationEvent, function() {
+                    domelem.classList.remove("succeed");
+                });
+              } else {
+                domelem.classList.add("failed");
+              }
+            });
+        }
+    };
+});
+
+angular.module( "fskApp" ).directive( "searchInput", function( $interval ) {
     return {
         restrict: "A",
         link: function( scope, elem, attrs ) {
@@ -234,7 +356,7 @@ angular.module( "msgApp" ).directive( "searchInput", function( $interval ) {
                     window.location.hash = loc;
                 }
             } );
-            $( '.msg-clear' ).on( 'click', function() {
+            $( '.fsk-clear' ).on( 'click', function() {
                 $( elem ).val( '' );
                 window.location.hash = loc;
                 $( elem ).removeClass( 'is-focused' );
@@ -243,8 +365,8 @@ angular.module( "msgApp" ).directive( "searchInput", function( $interval ) {
     };
 } );
 
-angular.module( 'msgApp' )
-    .directive( 'shadowDom', function( msg, $templateCache ) {
+angular.module( 'fskApp' )
+    .directive( 'shadowDom', function( fsk, $templateCache ) {
 
         var USER_STYLES_TEMPLATE = 'userStyles.html';
 
@@ -254,9 +376,9 @@ angular.module( 'msgApp' )
             link: function( scope, element, attrs, controller, transclude ) {
 
                 scope.$watch( function() {
-                    return msg;
+                    return fsk;
                 }, function() {
-                    if ( typeof element[ 0 ].createShadowRoot === 'function' && ( msg && !msg.disableEncapsulation ) ) {
+                    if ( typeof element[ 0 ].createShadowRoot === 'function' && ( fsk && !fsk.disableEncapsulation ) ) {
                         angular.element( element[ 0 ] ).empty();
                         var root = angular.element( element[ 0 ].createShadowRoot() );
                         root.append( $templateCache.get( USER_STYLES_TEMPLATE ) );
@@ -276,11 +398,11 @@ angular.module( 'msgApp' )
         };
     } );
 
-angular.module( "msgApp" ).directive( 'stickyHeader', function() {
+angular.module( "fskApp" ).directive( 'stickyHeader', function() {
     return {
         restrict: 'A',
         link: function( scope, elem, attrs ) {
-            var $element = $( '.msg-main' ).css( 'right', '0' );
+            var $element = $( '.fsk-main' ).css( 'right', '0' );
             $element.scroll( function() {
                 if ( $element.scrollTop() >= 50 ) {
                     $( elem ).addClass( 'scrolled' );
@@ -292,22 +414,7 @@ angular.module( "msgApp" ).directive( 'stickyHeader', function() {
     };
 } );
 
-// angular.module( "msgApp" ).directive( 'collapser', function() {
-//     return {
-//         restrict: 'A',
-//         link: function( scope, elem, attrs ) {
-//             scope.$watch('isShown', function(newValue, oldValue) {
-//                     if (oldValue) {
-//                         var offsetHeight = $(elem).height();
-//                         $(elem).css('max-height', offsetHeight);
-//                         console.log('Changed!');
-//                     }
-//                 });
-//         }
-//     };
-// } );
-
-angular.module( 'msgApp' ).directive( 'markdown', function() {
+angular.module( 'fskApp' ).directive( 'markdown', function() {
     var converter = new Showdown.converter();
     return {
         restrict: 'E',
@@ -318,13 +425,31 @@ angular.module( 'msgApp' ).directive( 'markdown', function() {
     };
 } );
 
-angular.module( "msgApp" ).directive( "svgIcon", function() {
+angular.module( 'fskApp' ).directive( 'fskClorder', function() {
+    return {
+        restrict: 'A',
+        link: function( scope, elem, attrs ) {
+            $(elem).on('click', function () {
+                var $reverse = $(this).next();
+                if ($reverse.hasClass('fsk-reverse')) {
+                    $reverse.removeClass('fsk-reverse');
+                    $(this).text('newest first');
+                } else {
+                    $reverse.addClass('fsk-reverse');
+                    $(this).text('oldest first');
+                }
+            });
+        }
+    };
+} );
+
+angular.module( "fskApp" ).directive( "svgIcon", function() {
     return {
         restrict: "EA",
         scope: {
             icon: '@'
         },
-        template: "<svg class='msg-icon msg-svg-{{icon}}'><use xlink:href=''></use></svg>",
+        template: "<svg class='fsk-icon fsk-svg-{{icon}}'><use xlink:href=''></use></svg>",
         link: function( scope, elem, attrs ) {
             $( elem ).find( 'use' ).attr( {
                 'xlink:href': '#' + scope.icon
@@ -333,7 +458,7 @@ angular.module( "msgApp" ).directive( "svgIcon", function() {
     };
 } );
 
-msgApp.directive( 'ngPrism', [ '$compile', function( $compile ) {
+fskApp.directive( 'ngPrism', [ '$compile', function( $compile ) {
     return {
         restrict: 'A',
         transclude: true,
@@ -358,17 +483,17 @@ msgApp.directive( 'ngPrism', [ '$compile', function( $compile ) {
 } ] );
 
 
-angular.module( 'msgApp' ).service( "msg", function( $http, $q ) {
-    var msg = $q.defer();
+angular.module( 'fskApp' ).service( "fsk", function( $http, $q ) {
+    var fsk = $q.defer();
     $http.get( 'json/styleGuide.json' ).success( function( data ) {
-        msg.resolve( data );
+        fsk.resolve( data );
     } );
     this.getStyles = function() {
-        return msg.promise;
+        return fsk.promise;
     };
 } );
 
-angular.module( 'msgApp' ).service( "stats", function( $http, $q ) {
+angular.module( 'fskApp' ).service( "stats", function( $http, $q ) {
     var stats = $q.defer();
     $http.get( 'json/statGuide.json' ).success( function( data ) {
         stats.resolve( data );
@@ -378,7 +503,7 @@ angular.module( 'msgApp' ).service( "stats", function( $http, $q ) {
     };
 } );
 
-angular.module( 'msgApp' ).service( "changelog", function( $http, $q ) {
+angular.module( 'fskApp' ).service( "changelog", function( $http, $q ) {
     var changelog = $q.defer();
     $http.get( 'json/changeLog.json' ).success( function( data ) {
         changelog.resolve( data );
