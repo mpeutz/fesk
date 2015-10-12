@@ -28,7 +28,7 @@ Each section in the guide is a defined by a block comment within the css file. T
 
 ### Syntax
 #### Guide Metadata
-This is heading documentation for the guide and will be included as a comment in the stylesheet. Must start with "Guide:"
+This is heading documentation for the guide and will be included as a comment in the stylesheet. This block must start with "Guide:" and should only be used once.
 
 ```HTML
 /*
@@ -45,7 +45,7 @@ Url:            Website link
 ```
 
 #### Chapters
-Define chapters of the stylesheet. These chapters are used to organize the styleguide. Must start with "Chapter:"
+Define chapters of the stylesheet. These chapters are used to organize the styleguide, adn be used to generate a TOC (table of Content). The TOC will be included as a comment at the top of the stylesheet. This section must start with "Chapter:"
 
 ```HTML
 /*
@@ -56,7 +56,7 @@ Description:    Chapter description (can contain HTML)
 ```
 
 #### Section
-Define section of the style sheet as chapters. These chapters are used to organize the styleguide. These chapters will also  be used to generate a TOC (table of Content) that will be included as a comment at the top of the stylesheet. Must start with "Section:"
+Define section of the style sheet as chapters. This block is used to document the majority of the styleguide. This section must start with "Section:"
 
 ```HTML
 /*
@@ -79,7 +79,7 @@ Code:           HTML/markup to show styles.
 ```
 
 #### Preprocessor
-Define colors within your styleguide. Must start with "process:".
+Define preprossor functions, mixins, and variables within your styleguide. Must start with "process:".
 
 ```
 /*
