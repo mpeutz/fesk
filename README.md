@@ -3,7 +3,7 @@ This is still in alpha stage.
 
 # fesk
 
-Fesk (**F**ront **E**nd **S**tarter **K**it) focusing on an integrated styleguide. The styleguide is based on KSS ([Knyle Style Sheets](http://warpspire.com/kss/)). KSS a documentation syntax for stylesheets is an awesome tool but lacked some features that a living styleguide needs. Fesk takes the format that KSS started and expands on it. It includes "browser compatibility", "notes", "preproccessor mixin, function and variable documentation", "color chips" and ~~"animations"~~. Furthermore Fesk has implemented a change log, stylesheet statistics dashboard, and ~~versioning~~.
+Fesk (**F**ront **E**nd **S**tarter **K**it) focusing on an integrated styleguide. The styleguide is based on KSS ([Knyle Style Sheets](http://warpspire.com/kss/)). KSS a documentation syntax for stylesheets is an awesome tool but lacked some features that a living styleguide needs. Fesk takes the format that KSS started and expands on it. It includes "browser compatibility", "notes", "preproccessor mixin, function and variable documentation", "color chips" and ~~"animations"~~. Furthermore Fesk has implemented a change log, stylesheet statistics dashboard, automatic TOC generation, and ~~versioning~~.
 
 
 This plugin currently lacks tests.
@@ -45,7 +45,7 @@ Url:            Website link
 ```
 
 #### Chapters
-Define chapters of the stylesheet. These chapters are used to organize the styleguide, adn be used to generate a TOC (table of Content). The TOC will be included as a comment at the top of the stylesheet. This section must start with "Chapter:"
+Define chapters of the stylesheet. These chapters are used to organize the styleguide, and be used to generate a TOC (table of Content). The TOC will be included as a comment at the top of the stylesheet. This section must start with "Chapter:"
 
 ```HTML
 /*
