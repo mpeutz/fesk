@@ -16,9 +16,9 @@ Full documentation to come
 
 - **fesk -i**, **fesk -initailize**  Follow prompts to initialize fesk
 - **fesk -u**, **fesk -update**   Follow prompts to update styleguide version
-- **fesk -g**, **fesk -guide**  Parses styleguide
+- **fesk -g**, **fesk -guide**  Generates and updates styleguide
 - **fesk -t**, **fesk -theme**  Follow prompts to update styleguide theme (is also run during fesk -i)
-- **fesk**  generate styleguide ( alias for fesk -g)
+- **fesk**  Generates and updates styleguide ( alias for fesk -g)
 - **fesk -?**, **fesk -help**  help
 
 ##Fesk styleguide comment blocks
