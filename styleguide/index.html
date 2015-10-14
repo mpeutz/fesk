@@ -52,7 +52,7 @@
         <!-- Main navigation used to traverse the sections and helper pages. -->
         <aside class="fsk-nav">
             <nav ng-include src="'view/mainNav.html'"></nav>
-            <div class="fsk-nav-footer"><a href="https://github.com/mpeutz/fesk">fesk styleguide</a> - 2015  |  ver: 0.1.0</div>
+            <div class="fsk-nav-footer"><a href="https://github.com/mpeutz/fesk">fesk styleguide</a> - 2015  |  ver: 0.0.1</div>
         </aside>
 
         <!-- Sub navigation used to traverse the components and isolated components. -->
@@ -70,7 +70,7 @@
 
 
         <!-- Content area -->
-        <div role="main" class="fsk-main" id="fsk-content" du-scroll-container>
+        <div role="main" class="fsk-main" ng-class="{'isolate': $root.title == 'component'}" id="fsk-content" du-scroll-container>
             <div ng-view class="content-animate"></div>
         </div>
 

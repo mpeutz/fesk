@@ -1,19 +1,31 @@
-# Guideline for FESK Styleguides
+# fesk
 
-### Introduction
+Fesk (**F**ront **E**nd **S**tarter **K**it) focusing on an integrated styleguide. The styleguide is based on KSS ([Knyle Style Sheets](http://warpspire.com/kss/)). KSS a documentation syntax for stylesheets is an awesome tool but lacked some features that a living styleguide needs. Fesk takes the format that KSS started and expands on it. It includes "browser compatibility", "notes", "preproccessor mixin, function and variable documentation", "color chips" and ~~"animations"~~. Furthermore Fesk has implemented a change log, stylesheet statistics dashboard, automatic TOC generation, and ~~versioning~~.
 
-Fesk (Front End Starter Kit) is meant to be used as a living styleguide, documentation generator, and Starter files. Use `fesk` command to generate styleguide
 
-### Enhanced - KSS
+This plugin currently lacks tests.
 
-Fesk Styleguide is based on KSS (Knyle Style Sheets). KSS a documentation syntax for stylesheets is an awesome tool but lacked some features that a living styleguide needs. Fesk takes the format that KSS started and expands on it. It includes "browser compatibility", "notes", "preproccessor mixin, function and variable references", "color chips" and "fonts". Furthermore Fesk has implemented a change log, and simple stylesheet statistics dashboard, and versioning.
+# How to use
+
+Full documentation to come
+
+##Fesk npm CLI commands
+
+- **fesk -i**, **fesk -initailize**  Follow prompts to initialize fesk
+- **fesk -u**, **fesk -update**   Follow prompts to update styleguide version
+- **fesk -g**, **fesk -guide**  Parses styleguide
+- **fesk -t**, **fesk -theme**  Follow prompts to update styleguide theme (is also run during fesk -i)
+- **fesk**  generate styleguide ( alias for fesk -g)
+- **fesk -?**, **fesk -help**  help
+
+##Fesk styleguide comment blocks
 
 ### How it works
 Each section in the guide is a defined by a block comment within the css file. The comment consists of key/value pairs with are used to generate the living styleguide. The styleguide is powered by angularjs parsing the key/value pairs.
 
 ### Syntax
 #### Guide Metadata
-This is heading documentation for the guide and will be included as a comment in the stylesheet. Must start with "Guide:"
+This is heading documentation for the guide and will be included as a comment in the stylesheet. This block must start with "Guide:" and should only be used once.
 
 ```HTML
 /*
@@ -30,7 +42,7 @@ Url:            Website link
 ```
 
 #### Chapters
-Define chapters of the stylesheet. These chapters are used to organize the styleguide. Must start with "Chapter:"
+Define chapters of the stylesheet. These chapters are used to organize the styleguide, and be used to generate a TOC (table of Content). The TOC will be included as a comment at the top of the stylesheet. This section must start with "Chapter:"
 
 ```HTML
 /*
@@ -41,18 +53,19 @@ Description:    Chapter description (can contain HTML)
 ```
 
 #### Section
-Define section of the style sheet as chapters. These chapters are used to organize the styleguide. These chapters will also  be used to generate a TOC (table of Content) that will be included as a comment at the top of the stylesheet. Must start with "Section:"
+Define section of the style sheet as chapters. This block is used to document the majority of the styleguide. This section must start with "Section:"
 
 ```HTML
 /*
 Section:        Number as chapter . section (e.g 1.2, 3.12, 11.3, etc.)
                 used to set the order of section appearance. (*required)
 Compatibility:  Browser compatiblity list. Comma delimited string with six items
-                (ie, firefox, chrome, , opera, ios, & andriod)
+                (ie, firefox, chrome, opera, ios, & android)
 Title:          Section name
 Type:           HTML - Type of section used to set template in styleguide.
                 This can be HTML, CSS, SCSS, LESS, or Color. (defaults to HTML)
 Tags:           Tags for organizing section. Comma delimited list.
+File:           File name, used to call out partials.
 Description:    Section description.
 Modifiers:      Use to set modifier classes on section.
                 (e.g. :hover - shows hover state,
@@ -63,7 +76,7 @@ Code:           HTML/markup to show styles.
 ```
 
 #### Preprocessor
-Define colors within your styleguide. Must start with "process:".
+Define preprossor functions, mixins, and variables within your styleguide. Must start with "process:".
 
 ```
 /*
@@ -111,81 +124,17 @@ Color:          List of colors: color, name of color, and use.
 */
 ```
 
+# Install
 
-## Overview page
+Currently this package is not in npm. I'm still working out some of the details before it is submitted. However, if you want to play with it you can install directly from this repository.
 
-You can create an Overview page for your styleguide using Markdown,
-check docs for more info.
+```
+npm install git://github.com/mpeutz/fesk.git
+```
 
-# Guideline for FESK Stylesheets and naming conventions
+# Gulp
 
-##Class naming conventions
-
-    .[utility]
-
-        utility- single word utility name
-
-        Example:
-        .list
-        .right
+There will be a [gulp plugin for fesk](https://github.com/mpeutz/gulp-fesk).
 
 
-    .[namespace][-block][_component]*[-modifier]*
-                                     [@breakPoint]*
-
-        namespace - 1-4 letters
-        block - single word element name
-        component - single word element child (only one level deep)
-        modifier - single word modifier
-
-        Example:
-        .jvs-navigaiton_item--first
-        .env-tab_wrap
-        .ui-btn
-
-##javascript class state
-
-    .[subject-verb agreement][-state]
-
-        Example:
-        .is-active
-        .has-focus
-        .not-selected
-
-
-##JS
-
-    $[var] = element wrapped in jQery
-    _[var] = standard javascript
-
-
-##Terms
-
-    layout
-        grid - container where item flow horizontally and wrap vertically
-        column - container
-        row
-        block/wrap
-        item
-
-
-
-    placement
-        abs
-        textr
-        textl
-        textc
-        floatr
-        floatl
-        padr
-        padl
-        padt
-        padb
-
-    style
-        unstyled
-        pane
-
-    action
-        trans
-        fade
+Made in Oregon.

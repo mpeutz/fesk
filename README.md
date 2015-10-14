@@ -1,6 +1,3 @@
-This is still in alpha stage.
-
-
 # fesk
 
 Fesk (**F**ront **E**nd **S**tarter **K**it) focusing on an integrated styleguide. The styleguide is based on KSS ([Knyle Style Sheets](http://warpspire.com/kss/)). KSS a documentation syntax for stylesheets is an awesome tool but lacked some features that a living styleguide needs. Fesk takes the format that KSS started and expands on it. It includes "browser compatibility", "notes", "preproccessor mixin, function and variable documentation", "color chips" and ~~"animations"~~. Furthermore Fesk has implemented a change log, stylesheet statistics dashboard, and ~~versioning~~.
@@ -14,12 +11,12 @@ Full documentation to come
 
 ##Fesk npm CLI commands
 
-    - **fesk -i**, **fesk -initailize**  Follow prompts to initialize fesk
-    - **fesk -u**, **fesk -update**   Follow prompts to update styleguide version
-    - **fesk -g**, **fesk -guide**  Parses styleguide
-    - **fesk -t**, **fesk -theme**  Follow prompts to update styleguide theme (is also run during fesk -i)
-    - **fesk**  generate styleguide ( alias for fesk -g)
-    - **fesk -?**, **fesk -help**  help
+- **fesk -i**, **fesk -initailize**  Follow prompts to initialize fesk
+- **fesk -u**, **fesk -update**   Follow prompts to update styleguide version
+- **fesk -g**, **fesk -guide**  Parses styleguide
+- **fesk -t**, **fesk -theme**  Follow prompts to update styleguide theme (is also run during fesk -i)
+- **fesk**  generate styleguide ( alias for fesk -g)
+- **fesk -?**, **fesk -help**  help
 
 ##Fesk styleguide comment blocks
 

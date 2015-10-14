@@ -137,12 +137,6 @@ fskApp.controller( 'titleCtrl', function( $scope, $location, $http, $routeParams
     };
 
 
-    $scope.data = {
-        message: "Transim"
-    };
-
-
-
 } );
 
 fskApp.filter( 'flatten', function() {
@@ -415,7 +409,7 @@ angular.module( "fskApp" ).directive( 'stickyHeader', function() {
 } );
 
 angular.module( 'fskApp' ).directive( 'markdown', function() {
-    var converter = new Showdown.converter();
+    var converter = new Showdown.converter({'strikethrough':true});
     return {
         restrict: 'E',
         link: function( scope, element, attrs ) {

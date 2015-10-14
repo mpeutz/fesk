@@ -86,6 +86,16 @@
     background-color: rgba(255, 255, 255, 0.3);
     }
 
+.fsk-top-icon:hover:before {
+    content: "Back to top";
+    position: absolute;
+    color: rgba(255, 255, 255, 0.8);
+    right: calc(100% + 20px);
+    top: 0;
+    white-space: nowrap;
+    font-weight: normal;
+    }
+
 .fsk-header {
     position: relative;
     }

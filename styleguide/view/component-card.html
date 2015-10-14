@@ -1,10 +1,14 @@
 <!-- component header -->
 <div class="fsk-header" ng-if="sec.group">
     <div class="fsk-title theme-main-color">
-        <a class="fsk-title-isolate" href="#/{{sec.group}}/{{sec.order}}">
+        <a class="fsk-title-isolate" href="#/{{sec.group}}/{{sec.order}}" ng-if="!(sec.type == 'chapter' || sec.code == '')">
             <span class="fsk-title-number">{{sec.order}}</span>
             <span class="fsk-title-text">{{ sec.title}}</span>
         </a>
+        <span class="fsk-title-isolate" ng-if="sec.type == 'chapter' || sec.code == ''">
+            <span class="fsk-title-number">{{sec.order}}</span>
+            <span class="fsk-title-text">{{ sec.title}}</span>
+        </span>
         <span class="fsk-source">{{sec.file}}</span>
         <div class="fsk-special-tags">
             <div class="fsk-java-icon fsk-tag-tooltip" title="this component requires javascript" ng-if="sec.tags | inArray: 'scripted'">
@@ -62,7 +66,7 @@
 </div>
 
 <!-- component example -->
-<div class="fsk-example" ng-if="sec.code != false">
+<div class="fsk-example" ng-if="!(sec.type == 'chapter' || sec.code == '' || sec.type == 'color')">
 
     <ul class="fsk-code-list">
         <li class="fsk-code-item" ng-repeat="codes in sec.code">

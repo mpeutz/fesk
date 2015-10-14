@@ -1,5 +1,39 @@
-<div class="fsk-content-area">
-    <div class="fsk-component-block" ng-repeat="sec in fsk | filter:categoryGroup( ) ">
-        <fsk-component data-tags="{{sec.tags}}"></fsk-component>
+<div class="fsk-content-area-isolated">
+    <div class="fsk-component-block-area-isolated" ng-repeat="sec in fsk | filter:categoryGroup( ) ">
+
+        <!-- color documentation -->
+        <div class="fsk-colors" ng-if="sec.type == 'color'">
+            <ul class="fsk-color-list">
+                <li class="fsk-color-item" ng-repeat="hue in sec.color">
+                    <div class="fsk-color-item-chip" ng-style="{backgroundColor:hue.hue}"></div>
+                    <div class="fsk-color-item-hue">{{hue.hue}}</div>
+                    <div class="fsk-color-item-name">{{hue.title}}</div>
+                    <div class="fsk-color-item-use">{{hue.use}}</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- preprocessor documentation -->
+        <div class="fsk-processor" ng-if="sec.type == 'preprocessor'">
+            <div class="fsk-processor-vars">Variables</div>
+            <ul class="fsk-processor-list">
+                <li class="fsk-processor-item" ng-repeat="vari in sec.vars">
+                    <span class="fsk-processor-item-name">{{vari.title}}</span>
+                    <span class="fsk-processor-item-use">{{vari.use}}</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- component example -->
+        <div class="fsk-example" ng-if="sec.code != false">
+
+            <ul class="fsk-code-list">
+                <li class="fsk-code-item">
+                    <shadow-dom>
+                        <pre class="fsk-example-code" ng-bind-html="renderHtml(sec.code[0].code.toString())"></pre>
+                    </shadow-dom>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

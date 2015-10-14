@@ -348,6 +348,15 @@ html {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.3); }
 
+.fsk-top-icon:hover:before {
+  content: "Back to top";
+  position: absolute;
+  color: rgba(255, 255, 255, 0.8);
+  right: calc(100% + 20px);
+  top: 0;
+  white-space: nowrap;
+  font-weight: normal; }
+
 .fsk-header {
   position: relative; }
 
@@ -433,7 +442,8 @@ aside .fsk-header {
   height: 57px;
   background-color: #171d25; }
 
-.fsk-sub-nav-heading {
+.fsk-sub-nav-heading,
+.fsk-back {
   height: 57px;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -490,6 +500,9 @@ aside .fsk-header {
   overflow-y: auto;
   height: 100vh;
   transition: 0.25s all cubic-bezier(0.95, 0.05, 0.795, 0.035); }
+
+.fsk-main.isolate {
+  background-color: #fff; }
 
 .content-animate.ng-enter,
 .content-animate.ng-leave {
@@ -595,11 +608,11 @@ aside .fsk-header {
 
 .fsk-title {
   box-sizing: border-box;
+  height: 8.5em;
   margin-bottom: 2em;
   padding: 2em;
   border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  height: 8.5em; }
+  border-top-right-radius: 3px; }
 
 .fsk-title-number {
   font-size: 2.5em;
@@ -636,17 +649,18 @@ aside .fsk-header {
   color: rgba(255, 255, 255, 0.6); }
 
 .fsk-special-tags {
-  fill: rgba(255, 255, 255, 0.6);
+  position: relative;
+  top: 26px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  fill: rgba(255, 255, 255, 0.6);
   -webkit-justify-content: flex-end;
       -ms-flex-pack: end;
-          justify-content: flex-end;
-  position: relative;
-  top: 26px; }
+          justify-content: flex-end; }
 
-.fsk-java-icon, .fsk-beta-icon {
+.fsk-java-icon,
+.fsk-beta-icon {
   margin-left: 5px;
   cursor: pointer; }
 
@@ -655,27 +669,27 @@ aside .fsk-header {
   display: inline; }
 
 .fsk-tag-tooltip:after {
-  top: 20px;
-  opacity: 0;
-  pointer-events: none;
-  transition: .2s ease-out;
   position: absolute;
   z-index: 98;
+  top: 20px;
   right: -30%;
   display: inline-block;
   max-width: 350px;
   padding: 5px 15px;
-  white-space: nowrap;
   content: attr(title);
+  transition: 0.2s ease-out;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
   color: #fff;
   border-radius: 5px;
   background: #333;
   background: rgba(0, 0, 0, 0.8); }
 
 .fsk-tag-tooltip:hover:after {
-  opacity: 1;
   top: 30px;
-  transition: .2s ease-out; }
+  transition: 0.2s ease-out;
+  opacity: 1; }
 
 .fsk-tag-tooltip:before {
   position: absolute;
@@ -683,74 +697,79 @@ aside .fsk-header {
   top: 14px;
   left: 12%;
   content: '';
+  transition: 0.2s ease-out;
+  opacity: 0;
   border: solid;
   border-width: 0 6px 6px 6px;
-  border-color: transparent transparent #333;
-  opacity: 0;
-  transition: .2s ease-out; }
+  border-color: transparent transparent #333; }
 
 .fsk-tag-tooltip:hover:before {
   top: 24px;
-  opacity: 1;
-  transition: .2s ease-out; }
+  transition: 0.2s ease-out;
+  opacity: 1; }
 
 .fsk-accordion-trigger {
-  padding: 0.5em 1em;
+  position: relative;
   display: block;
-  cursor: pointer;
-  position: relative; }
+  padding: 0.5em 1em;
+  cursor: pointer; }
 
 .fsk-accordion-trigger:hover {
   text-decoration: none;
   background-color: #fcfcfc; }
 
 .fsk-accordion-triggers {
+  position: relative;
+  top: -2px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  border-top: 1px solid #eee;
   -webkit-justify-content: space-around;
       -ms-flex-pack: distribute;
-          justify-content: space-around;
-  position: relative;
-  top: -2px;
-  border-top: 1px solid #eee; }
+          justify-content: space-around; }
 
 .fsk-accordion-trigger {
+  text-align: center;
   -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  text-align: center; }
+          flex: 1 1 auto; }
 
 .fsk-accordion h4 {
   margin-top: 0; }
 
-.fsk-accordion-trigger.is-expanded:after {
-  content: '';
+.fsk-accordion-trigger:after {
   position: absolute;
+  z-index: 5;
   top: 100%;
   left: 50%;
-  margin-left: -10px;
   width: 0;
   height: 0;
+  margin-left: 0;
+  content: '';
+  border-width: 0 0 0 0;
   border-style: solid;
-  border-width: 10px 10px 0 10px;
   border-color: #fff transparent transparent transparent;
-  z-index: 5; }
+  transition: all 0.35s ease-in-out; }
+
+.fsk-accordion-trigger.is-expanded:after {
+  border-width: 10px 10px 0 10px;
+  margin-left: -10px; }
 
 .fsk-accordion-contentGroup {
-  padding: 0;
   margin: 0;
+  padding: 0;
   list-style: none;
-  background-color: #171D25;
+  border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px; }
+  background-color: #171d25; }
 
 .fsk-accordion-content {
   display: none;
-  background-color: #171D25;
   color: #fff;
+  border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px; }
+  background-color: #171d25; }
 
 .fsk-compatibility,
 .fsk-usage,
@@ -764,12 +783,12 @@ aside .fsk-header {
   display: flex; }
 
 .fsk-compatibility-chip {
+  font-size: 3em;
+  line-height: 1;
+  text-align: center;
   -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  font-size: 3em;
-  text-align: center;
-  line-height: 1; }
+          flex: 1 1 auto; }
 
 .fsk-compatibility-title {
   font-size: 14px;
@@ -814,18 +833,18 @@ aside .fsk-header {
 
 .fsk-processor-item {
   display: block;
+  width: 100%;
   padding-top: 8px;
-  padding-bottom: 8px;
-  width: 100%; }
+  padding-bottom: 8px; }
 
 .fsk-processor-item + .fsk-processor-item {
-  border-top: 1px solid #E2E2E2; }
+  border-top: 1px solid #e2e2e2; }
 
 .fsk-processor-item-name {
   font-weight: bold;
   display: table-cell;
-  vertical-align: top;
-  width: 150px; }
+  width: 150px;
+  vertical-align: top; }
 
 .fsk-processor-item-use {
   display: table-cell; }
@@ -851,9 +870,9 @@ aside .fsk-header {
   padding-right: 1em; }
 
 .fsk-tag svg {
-  fill: #fff;
   position: relative;
-  top: 5px; }
+  top: 5px;
+  fill: #fff; }
 
 .fsk-code-item {
   position: relative;
@@ -862,11 +881,11 @@ aside .fsk-header {
 
 .fsk-code-title {
   font-size: 12px;
+  font-style: italic;
   position: absolute;
   top: 0;
   right: 0;
   padding: 0.5em 1em;
-  font-style: italic;
   border-bottom-left-radius: 3px; }
 
 .fsk-markup-show-btn {
@@ -884,15 +903,15 @@ aside .fsk-header {
   outline: 0; }
 
 .fsk-copy-markup {
-  border: none;
-  padding: 0.65em 1em;
+  font-size: 0.85em;
   position: absolute;
   top: 0;
   right: 0;
+  padding: 0.65em 1em;
+  cursor: pointer;
   text-transform: uppercase;
   color: #fff;
-  font-size: .85em;
-  cursor: pointer; }
+  border: none; }
 
 .fsk-markup-container.succeed {
   -webkit-animation: pulse 1.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);

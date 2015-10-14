@@ -2,13 +2,13 @@
 
 /*
 guide: Transim Test Styles
-client: Company
+client: Client
 description: Basic styleguide test file
 version: 0.0.1
 date: 4/23/2015
 author: Mike
-email: transim@transim.com
-url: www.transim.com
+email: mike@website.com
+url: www.website.com
 */
 
 
@@ -134,14 +134,17 @@ Material Design Blue Gray
  var:
   $main-color
   Used as the main color of the site.
+  ~~~
+  $alt-color
+  Used as the alternative color of the site.
 mixin:
- @mixin ($main-color)
+ @mixin ($main-color, $alt-color)
  */
 
 /*
 Scss: 1.4
 title: General variables
-description:    General color based variabvle
+description:    General color based variable
 lang: sass
 var:
 $red

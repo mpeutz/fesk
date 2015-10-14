@@ -1,210 +1,194 @@
 .fsk-component-block {
     margin-bottom: 2em;
-
     border-radius: 3px;
     background-color: #fff;
     box-shadow: inset 0 -1px 0 #ccc, 0 0 9px #ddd;
-}
+    }
 
 .fsk-title {
     box-sizing: border-box;
+    height: 8.5em;
     margin-bottom: 2em;
     padding: 2em;
-
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-
-    height: 8.5em;
-}
+    }
 
 .fsk-title-number {
     font-size: 2.5em;
     font-weight: 300;
-
     position: relative;
-
     display: inline-block;
-
     padding-right: 0.5em;
-
     vertical-align: middle;
-
     color: #fff;
-}
+    }
 
 .fsk-title-isolate {
     text-decoration: none;
-}
+    }
 
 .fsk-source {
     float: right;
-
-    color:  rgba(255, 255, 255, 0.7);
-}
+    color: rgba(255, 255, 255, 0.7);
+    }
 
 .fsk-title-number:after {
     position: absolute;
     top: -5px;
     right: 0;
-
     width: 1px;
     height: 165%;
     margin-right: 0.5em;
-
     content: '';
-
     background-color: rgba(0, 0, 0, 0.16);
-}
+    }
 
 .fsk-title-text {
     font-size: 1.2em;
     line-height: 1;
-
     display: inline-block;
-
     width: 150px;
-
     vertical-align: middle;
-
     color: rgba(255, 255, 255, 0.6);
-}
+    }
 
 .fsk-special-tags {
-    fill: rgba(255, 255, 255, 0.6);
-    display: flex;
-    justify-content: flex-end;
     position: relative;
     top: 26px;
-}
+    display: flex;
 
-.fsk-java-icon, .fsk-beta-icon {
+    fill: rgba(255, 255, 255, 0.6);
+    justify-content: flex-end;
+    }
+
+.fsk-java-icon,
+.fsk-beta-icon {
     margin-left: 5px;
     cursor: pointer;
-}
+    }
 
 .fsk-tag-tooltip {
     position: relative;
-
     display: inline;
-}
+    }
 
 .fsk-tag-tooltip:after {
-    top: 20px;
-    opacity: 0;
-    pointer-events: none;
-
-    transition: .2s ease-out;
     position: absolute;
     z-index: 98;
+    top: 20px;
     right: -30%;
-
     display: inline-block;
-
     max-width: 350px;
     padding: 5px 15px;
-    white-space: nowrap;
-
     content: attr(title);
-
+    transition: 0.2s ease-out;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
     color: #fff;
     border-radius: 5px;
     background: #333;
     background: rgba(0, 0, 0, 0.8);
-
-}
+    }
 
 .fsk-tag-tooltip:hover:after {
-    opacity: 1;
     top: 30px;
-    transition: .2s ease-out;
-}
+    transition: 0.2s ease-out;
+    opacity: 1;
+    }
 
 .fsk-tag-tooltip:before {
     position: absolute;
     z-index: 99;
     top: 14px;
     left: 12%;
-
     content: '';
-
+    transition: 0.2s ease-out;
+    opacity: 0;
     border: solid;
     border-width: 0 6px 6px 6px;
     border-color: transparent transparent #333;
-
-    opacity: 0;
-    transition: .2s ease-out;
-}
+    }
 
 .fsk-tag-tooltip:hover:before {
     top: 24px;
+    transition: 0.2s ease-out;
     opacity: 1;
-    transition: .2s ease-out;
-}
+    }
 
 .fsk-accordion-trigger {
-  padding: .5em 1em;
-  display: block;
-  cursor: pointer;
-  position: relative;
-}
+    position: relative;
+    display: block;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    }
 .fsk-accordion-trigger:hover {
-  text-decoration: none;
-  background-color: #fcfcfc;
-}
+    text-decoration: none;
+    background-color: #fcfcfc;
+    }
 
 .fsk-accordion-triggers {
-    display: flex;
-    justify-content: space-around;
     position: relative;
     top: -2px;
+    display: flex;
     border-top: 1px solid #eee;
-}
+
+    justify-content: space-around;
+    }
 
 .fsk-accordion-trigger {
-    flex: 1 1 auto;
     text-align: center;
-}
+
+    flex: 1 1 auto;
+    }
 
 .fsk-accordion h4 {
     margin-top: 0;
-}
+    }
 
-.fsk-accordion-trigger.is-expanded:after {
-    content: '';
+.fsk-accordion-trigger:after {
     position: absolute;
+    z-index: 5;
     top: 100%;
     left: 50%;
-    margin-left: -10px;
     width: 0;
     height: 0;
+    margin-left: 0;
+    content: '';
+    border-width: 0 0 0 0;
     border-style: solid;
-    border-width: 10px 10px 0 10px;
     border-color: #fff transparent transparent transparent;
-    z-index: 5;
-}
+    transition: all .35s ease-in-out;
+    }
+
+.fsk-accordion-trigger.is-expanded:after {
+    border-width: 10px 10px 0 10px;
+    margin-left: -10px;
+    }
 
 .fsk-accordion-contentGroup {
-    padding: 0;
     margin: 0;
+    padding: 0;
     list-style: none;
-    background-color: #171D25;
-    border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-}
+    border-bottom-left-radius: 5px;
+    background-color: #171d25;
+    }
 
 .fsk-accordion-content {
     display: none;
-    background-color: #171D25;
     color: #fff;
-    border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-}
+    border-bottom-left-radius: 5px;
+    background-color: #171d25;
+    }
 
 .fsk-compatibility,
 .fsk-usage,
 .fsk-tags {
     padding: 2em;
-}
+    }
 
 .fsk-compatibility-list {
     position: relative;
@@ -212,10 +196,11 @@
     }
 
 .fsk-compatibility-chip {
-    flex: 1 1 auto;
     font-size: 3em;
-    text-align: center;
     line-height: 1;
+    text-align: center;
+
+    flex: 1 1 auto;
     }
 
 .fsk-compatibility-title {
@@ -226,35 +211,33 @@
 .fsk-description-text,
 .fsk-mod {
     padding: 0 2em 2em;
-}
+    }
 
 .fsk .fsk-description-text {
     font-family: inherit;
     line-height: 1.65;
-
     margin-top: 0;
-}
+    }
 
 .fsk-description-text code {
     padding: 0.2em 0.5em 0.2em 0.2em;
-
     color: #333;
     border: 1px solid #ddd;
     border-radius: 3px;
     background-color: #f5f5f5;
-}
+    }
 
 .fsk-example-code * {
     white-space: initial;
-}
+    }
 
 .fsk-processor {
     padding: 0 2em 2em;
-}
+    }
 .fsk-processor-vars {
     font-size: 0.85em;
     text-transform: uppercase;
-}
+    }
 
 .fsk-mod-list,
 .fsk-color-list,
@@ -262,121 +245,124 @@
 .fsk-processor-list {
     margin: 0;
     padding: 0;
-
     list-style: none;
-}
+    }
 
 .fsk-mod-item {
     padding: 0.25em 1em;
-}
+    }
 
 .fsk-processor-item {
     display: block;
+    width: 100%;
     padding-top: 8px;
     padding-bottom: 8px;
-    width: 100%;
-}
+    }
 
 .fsk-processor-item + .fsk-processor-item {
-    border-top: 1px solid #E2E2E2;
+    border-top: 1px solid #e2e2e2;
     }
 
 .fsk-processor-item-name {
     font-weight: bold;
     display: table-cell;
-    vertical-align: top;
     width: 150px;
+    vertical-align: top;
     }
 
 .fsk-processor-item-use {
     display: table-cell;
-}
+    }
 
 .fsk-mods-classname {
     font-weight: 700;
-}
+    }
 
 .fsk-tag-list {
-    display:flex;
+    display: flex;
+
     justify-content: flex-start;
-}
+    }
 
 .fsk-tag {
     display: inline-block;
+
     flex: 1 1 auto;
-}
+    }
 
 .fsk-svg-icon {
     padding-right: 1em;
-}
+    }
 
 .fsk-tag svg {
-    fill: #fff;
     position: relative;
     top: 5px;
-}
+
+    fill: #fff;
+    }
 
 .fsk-code-item {
     position: relative;
-
     padding: 2em;
-
     border-top: 1px solid #ccc;
-}
+    }
 
 .fsk-code-title {
     font-size: 12px;
-
+    font-style: italic;
     position: absolute;
     top: 0;
     right: 0;
-
     padding: 0.5em 1em;
-
-    font-style: italic;
-
     // border-bottom: 1px solid #ccc;
     // border-left: 1px solid #ccc;
     border-bottom-left-radius: 3px;
-}
+    }
 
 .fsk-markup-show-btn {
     width: 100%;
     padding: 0.5em 0;
-
     cursor: pointer;
-
     color: #999;
     border: none;
     background: transparent;
-}
+    }
 
 .fsk-markup-show-btn:hover {
     color: #555;
-}
+    }
 
 .fsk-markup-show-btn:focus {
     outline: 0;
-}
+    }
 
 .fsk-copy-markup {
-    border: none;
-    padding: .65em 1em;
+    font-size: 0.85em;
     position: absolute;
     top: 0;
     right: 0;
+    padding: 0.65em 1em;
+    cursor: pointer;
     text-transform: uppercase;
     color: #fff;
-    font-size: .85em;
-    cursor: pointer;
-}
+    border: none;
+    }
 
 .fsk-markup-container.succeed {
     animation: pulse 1.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
 @keyframes pulse {
-    0% {outline: 0 green solid; outline-offset: 0}
-    50% {outline: 8px green solid; outline-offset: -4px}
-    100% {outline: 0 green solid;  outline-offset: -150px}
+    0% {
+        outline: 0 green solid;
+        outline-offset: 0;
+        }
+    50% {
+        outline: 8px green solid;
+        outline-offset: -4px;
+        }
+    100% {
+        outline: 0 green solid;
+        outline-offset: -150px;
+        }
     }

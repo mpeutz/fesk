@@ -10,6 +10,10 @@
             transition: 0.25s all cubic-bezier(0.95, 0.05, 0.795, 0.035);
 }
 
+.fsk-main.isolate {
+    background-color: #fff;
+}
+
 .content-animate.ng-enter,
 .content-animate.ng-leave {
     position: absolute;
