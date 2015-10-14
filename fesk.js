@@ -412,8 +412,8 @@ function fnShadeBlendConvert(p, from, to) {
 }
 
 
-function fnHexTransparent(p, hex) {
-    var hex = hex.replace('#', '');
+function fnHexTransparent(p, hexa) {
+    var hex = hexa.replace('#', '');
 
     var c_r = fnHexStringToInt(hex.substr(0, 2));
     var c_g = fnHexStringToInt(hex.substr(2, 2));
@@ -424,9 +424,8 @@ function fnHexTransparent(p, hex) {
 }
 
 
-function fnLightness(hex) {
-
-    var hex = hex.replace('#', '');
+function fnLightness(hexa) {
+    var hex = hexa.replace('#', '');
 
     var c_r = fnHexStringToInt(hex.substr(0, 2));
     var c_g = fnHexStringToInt(hex.substr(2, 2));
@@ -437,7 +436,8 @@ function fnLightness(hex) {
     } else {
         return "#fff";
     }
-};
+}
+
 function fnHexStringToInt(hex_string) {
     hex_string = (hex_string + '').replace(/[^a-f0-9]/gi, '');
     return parseInt(hex_string, 16);

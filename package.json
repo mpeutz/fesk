@@ -1,7 +1,7 @@
 {
   "name": "fesk",
   "version": "0.0.1",
-  "description": "FESK (Front-end Starter Kit) is a simple web starter kit",
+  "description": "FESK (Front-end Starter Kit) a simple web starter kit based around a styleguide generator",
   "main": "fesk.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

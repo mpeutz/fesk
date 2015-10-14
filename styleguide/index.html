@@ -47,7 +47,7 @@
 
 <body id="fsk-node" class="fsk {{$root.title}}" ng-controller='titleCtrl'>
 
-    <div class="fsk-container">
+    <div class="fsk-container" ng-class="{'isolate': $root.title == 'component'}">
 
         <!-- Main navigation used to traverse the sections and helper pages. -->
         <aside class="fsk-nav">
@@ -70,7 +70,7 @@
 
 
         <!-- Content area -->
-        <div role="main" class="fsk-main" ng-class="{'isolate': $root.title == 'component'}" id="fsk-content" du-scroll-container>
+        <div role="main" class="fsk-main" id="fsk-content" du-scroll-container>
             <div ng-view class="content-animate"></div>
         </div>
 
