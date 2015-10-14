@@ -22,6 +22,7 @@ var argv        = require( "yargs" )
                 .option( "u", { alias: "update", demand: false, describe: "Update styleguide version" } )
                 .option( "g", { alias: "guide", demand: false, describe: "Generate styleguide" } )
                 .option( "t", { alias: "theme", demand: false, describe: "Generate theme colors for styleguide" } )
+                .option( "p", { alias: "partial", demand: false, describe: "Add a partial file to main styles" } )
                 .help( "?" )
                 .alias( "?", "help" )
                 .example( "fesk -i", "Follow prompts to initialize fesk" )
@@ -70,20 +71,28 @@ var cquestions = [
   }
 ];
 
-// var uquestions = [
-//   {
-//     type: "input",
-//     name: "version",
-//     message: "Version of styleguide?",
-//     default: "0.0.1"
-//   },
-//   {
-//     type: "input",
-//     name: "comments",
-//     message: "Versions comments?",
-//     default: "No comments"
-//   }
-// ];
+var squestions = [
+    {
+    type: "list",
+    name: "type",
+    message: "What kind of partial file is this",
+    choices: [ "scss", "less", "stylus" ],
+    filter: function( val ) { return val.toLowerCase(); }
+  },
+  {
+    type: "list",
+    name: "partial",
+    message: "What kind of partial file is this",
+    choices: [ "Utility", "Base", "Element", "Component", "Page", "Trump", "None" ],
+    filter: function( val ) { return val.toLowerCase(); }
+  },
+  {
+    type: "input",
+    name: "file",
+    message: "Name of sass file",
+    default: "unamed"
+  }
+];
 
 if (argv.init || argv.i) {
 
@@ -144,6 +153,11 @@ if (argv.guide || argv.g) {
 
 if (argv.theme || argv.t) {
     feskColors();
+}
+
+if (argv.partial || argv.p) {
+
+   feskPartial();
 }
 
 function feskInit() {
@@ -250,6 +264,59 @@ function feskTheme(themeColor) {
         return console.log(err);
       }
       console.log("Theme file is generated.");
+    });
+}
+
+function feskPartial() {
+     console.log('Let\'s add some files, yo!');
+
+    var fileType = '';
+    var filePart = '';
+
+    inquirer.prompt( squestions, function( sanswers ) {
+
+         switch (sanswers.type) {
+            case 'scss':
+                fileType = '.scss';
+                break;
+            case 'less':
+                fileType = '.less';
+                break;
+            case 'stylus':
+                fileType = '.styl';
+                break;
+            }
+
+         switch (sanswers.partial) {
+            case 'utility':
+                filePart = 'u';
+                break;
+            case 'base':
+                filePart = 'b';
+                break;
+            case 'element':
+                filePart = 'e';
+                break;
+            case 'component':
+                filePart = 'c';
+                break;
+            case 'page':
+                filePart = 'p';
+                break;
+            case 'trump':
+                filePart = 't';
+                break;
+            case 'none':
+                filePart = '';
+                break;
+            }
+
+        var file = sanswers.file.replace(/\^\\:\*\?"<>\|/, '').replace(/\s/, '-');
+
+        var fileName = "_" + filePart + "-" + file.toLowerCase() + fileType.toString();
+        var partialPath = path.join(process.cwd() , 'css/partials/' + fileName);
+        fs.writeFile(partialPath,"/* ------------------------------------------------\r\n *  " + file.toUpperCase() + "\r\n *  ------------------------------------------------ */");
+
     });
 }
 
