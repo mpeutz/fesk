@@ -29,11 +29,12 @@ var argv        = require( "yargs" )
                 .example( "fesk -u", "Follow prompts to update styleguide version" )
                 .example( "fesk -g", "Parses styleguide" )
                 .example( "fesk -t", "Follow prompts to update styleguide theme" )
+                .example( "fesk -p", "Adds partial file to main stylesheets")
                 .example( "fesk", "generate styleguide" )
                 .epilog( "Produced by fesk - Made in Oregon." )
                   .argv;
 
-if ( !argv.i && !argv.init && !argv.u && !argv.update && !argv.g && !argv.guide && !argv.t && !argv.theme) {
+if ( !argv.i && !argv.init && !argv.u && !argv.update && !argv.g && !argv.guide && !argv.t && !argv.theme && !argv.partial && !argv.p ) {
     argv.g = true;
 }
 
@@ -156,8 +157,7 @@ if (argv.theme || argv.t) {
 }
 
 if (argv.partial || argv.p) {
-
-   feskPartial();
+    feskPartial();
 }
 
 function feskInit() {
@@ -182,7 +182,6 @@ function feskFiles() {
             confirm: true
         },
         function (err) {if (err) {return console.log('Woah, cool your jets pound cake, looks like something went awry.');}
-        //console.log('Righty-oh! The dev files have been dropped into the main folder.');
 
         if (argv.init || argv.i) {
 
@@ -268,10 +267,10 @@ function feskTheme(themeColor) {
 }
 
 function feskPartial() {
-     console.log('Let\'s add some files, yo!');
 
     var fileType = '';
     var filePart = '';
+    var stylePart = '';
 
     inquirer.prompt( squestions, function( sanswers ) {
 
@@ -289,33 +288,58 @@ function feskPartial() {
 
          switch (sanswers.partial) {
             case 'utility':
-                filePart = 'u';
+                filePart = 'u-';
+                stylePart = '// base';
                 break;
             case 'base':
-                filePart = 'b';
+                filePart = 'b-';
+                stylePart = '// element';
                 break;
             case 'element':
-                filePart = 'e';
+                filePart = 'e-';
+                stylePart = '// component';
                 break;
             case 'component':
-                filePart = 'c';
+                filePart = 'c-';
+                stylePart = '// page';
                 break;
             case 'page':
-                filePart = 'p';
+                filePart = 'p-';
+                stylePart = '// trump';
                 break;
             case 'trump':
-                filePart = 't';
+                filePart = 't-';
+                stylePart = '// misc';
                 break;
             case 'none':
                 filePart = '';
+                stylePart = '// misc';
                 break;
             }
 
         var file = sanswers.file.replace(/\^\\:\*\?"<>\|/, '').replace(/\s/, '-');
 
-        var fileName = "_" + filePart + "-" + file.toLowerCase() + fileType.toString();
+        var fileName = "_" + filePart + file.toLowerCase() + fileType.toString();
         var partialPath = path.join(process.cwd() , 'css/partials/' + fileName);
         fs.writeFile(partialPath,"/* ------------------------------------------------\r\n *  " + file.toUpperCase() + "\r\n *  ------------------------------------------------ */");
+
+          var line = "@import '" + filePart + file.toLowerCase() + "';";
+
+          var search = stylePart;
+
+          var body = fs.readFileSync('css/partials/styles.scss').toString();
+
+          if (body.indexOf(search) > 0 ) {
+            body = body.split('\r');
+            console.log(body);
+            if (sanswers.partial == 'none') {
+                body.push(line);
+            } else {
+                body.splice(body.indexOf(search) - 1,0,line);
+            }
+            var output = body.join('\r');
+            fs.writeFileSync('css/partials/styles.scss', output);
+          }
 
     });
 }

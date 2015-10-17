@@ -109,12 +109,15 @@
         </li>
         <li class="fsk-accordion-content fsk-compatibility" ng-if="sec.compatibility && sec.compatibility != ''">
             <div class="fsk-compatibility-list">
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ie.length > 1">{{sec.compatibility.ie}}<div class="fsk-compatibility-title">Internet Explorer</div></div>
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ff.length > 1">{{sec.compatibility.ff}}<div class="fsk-compatibility-title">Firefox</div></div>
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.chr.length > 1">{{sec.compatibility.chr}}<div class="fsk-compatibility-title">Chrome</div></div>
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.op.length > 1">{{sec.compatibility.op}}<div class="fsk-compatibility-title">Opera</div></div>
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ios.length > 1">{{sec.compatibility.ios}}<div class="fsk-compatibility-title">iOS</div></div>
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.and.length > 1">{{sec.compatibility.and}}<div class="fsk-compatibility-title">Android</div></div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ie.length > 0">
+                    {{sec.compatibility.ie}}
+                <div class="fsk-compatibility-title">Internet Explorer</div>
+                </div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ff.length > 0">{{sec.compatibility.ff}}<div class="fsk-compatibility-title">Firefox</div></div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.chr.length > 0">{{sec.compatibility.chr}}<div class="fsk-compatibility-title">Chrome</div></div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.op.length > 0">{{sec.compatibility.op}}<div class="fsk-compatibility-title">Opera</div></div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ios.length > 0">{{sec.compatibility.ios}}<div class="fsk-compatibility-title">iOS</div></div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.and.length > 0">{{sec.compatibility.and}}<div class="fsk-compatibility-title">Android</div></div>
             </div>
         </li>
         <li class="fsk-accordion-content fsk-tags" ng-if="sec.tags && sec.tags">
