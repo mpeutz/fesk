@@ -1,6 +1,6 @@
 # fesk
 
-Fesk (**F**ront **E**nd **S**tarter **K**it) focusing on an integrated styleguide. The styleguide is based on KSS ([Knyle Style Sheets](http://warpspire.com/kss/)). KSS a documentation syntax for stylesheets is an awesome tool but lacked some features that a living styleguide needs. Fesk takes the format that KSS started and expands on it. It includes "browser compatibility", "notes", "preproccessor mixin, function and variable documentation", "color chips" and ~~"animations"~~. Furthermore Fesk has implemented a change log, stylesheet statistics dashboard, and ~~versioning~~.
+Fesk (**F**ront **E**nd **S**tarter **K**it) focusing on an integrated styleguide. The styleguide is based on KSS ([Knyle Style Sheets](http://warpspire.com/kss/)). KSS a documentation syntax for stylesheets is an awesome tool but lacked some features that a living styleguide needs. Fesk takes the format that KSS started and expands on it. It includes "browser compatibility", "notes", "preproccessor mixin, function and variable documentation", "color chips" and ~~"animations"~~. Furthermore Fesk has implemented a change log, stylesheet statistics dashboard, automatic TOC generation, and ~~versioning~~.
 
 
 This plugin currently lacks tests.
@@ -15,6 +15,7 @@ Full documentation to come
 - **fesk -u**, **fesk -update**   Follow prompts to update styleguide version
 - **fesk -g**, **fesk -guide**  Parses styleguide
 - **fesk -t**, **fesk -theme**  Follow prompts to update styleguide theme (is also run during fesk -i)
+- **fesk -p**, **fesk -partial**  Adds a partial to main styles
 - **fesk**  generate styleguide ( alias for fesk -g)
 - **fesk -?**, **fesk -help**  help
 
@@ -25,7 +26,7 @@ Each section in the guide is a defined by a block comment within the css file. T
 
 ### Syntax
 #### Guide Metadata
-This is heading documentation for the guide and will be included as a comment in the stylesheet. Must start with "Guide:"
+This is heading documentation for the guide and will be included as a comment in the stylesheet. This block must start with "Guide:" and should only be used once.
 
 ```HTML
 /*
@@ -42,7 +43,7 @@ Url:            Website link
 ```
 
 #### Chapters
-Define chapters of the stylesheet. These chapters are used to organize the styleguide. Must start with "Chapter:"
+Define chapters of the stylesheet. These chapters are used to organize the styleguide, and be used to generate a TOC (table of Content). The TOC will be included as a comment at the top of the stylesheet. This section must start with "Chapter:"
 
 ```HTML
 /*
@@ -53,18 +54,19 @@ Description:    Chapter description (can contain HTML)
 ```
 
 #### Section
-Define section of the style sheet as chapters. These chapters are used to organize the styleguide. These chapters will also  be used to generate a TOC (table of Content) that will be included as a comment at the top of the stylesheet. Must start with "Section:"
+Define section of the style sheet as chapters. This block is used to document the majority of the styleguide. This section must start with "Section:"
 
 ```HTML
 /*
 Section:        Number as chapter . section (e.g 1.2, 3.12, 11.3, etc.)
                 used to set the order of section appearance. (*required)
 Compatibility:  Browser compatiblity list. Comma delimited string with six items
-                (ie, firefox, chrome, , opera, ios, & andriod)
+                (ie, firefox, chrome, opera, ios, & android)
 Title:          Section name
 Type:           HTML - Type of section used to set template in styleguide.
                 This can be HTML, CSS, SCSS, LESS, or Color. (defaults to HTML)
 Tags:           Tags for organizing section. Comma delimited list.
+File:           File name, used to call out partials.
 Description:    Section description.
 Modifiers:      Use to set modifier classes on section.
                 (e.g. :hover - shows hover state,
@@ -75,7 +77,7 @@ Code:           HTML/markup to show styles.
 ```
 
 #### Preprocessor
-Define colors within your styleguide. Must start with "process:".
+Define preprossor functions, mixins, and variables within your styleguide. Must start with "process:".
 
 ```
 /*
