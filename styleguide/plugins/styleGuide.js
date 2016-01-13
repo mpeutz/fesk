@@ -755,15 +755,15 @@ module.exports.postcss = function styleGuide( css ) {
 function drawSVG (spec) {
     var svgHeight = 300;
     var svgWidth = 1200;
-    var steps = svgWidth / spec.length;
+    var steps = svgWidth / spec.length + 2;
     var halfStep = steps / 2;
     halfStep = +halfStep.toFixed(4);
     var points =[];
     var nodes = [];
 
     for (i = 1; i < spec.length; i++) {
-        var curr = steps * (i - 1);
-        var currHalf = curr + halfStep
+        var curr = steps * (i - 1.25);
+        var currHalf = curr + halfStep;
         currHalf = +currHalf.toFixed(2);
         var rank = (spec[i].rank * -1) + (svgHeight - 3);
         if (i === 1 ) {
@@ -774,11 +774,11 @@ function drawSVG (spec) {
 
         var currSel = spec[i].selector.toString().replace(/"/g, "'");
 
-        nodes.push('<g class="fsk-svg-group"><rect x="' + curr + '" y="0" width="' + steps +'" height="100%"  style="cursor: pointer; fill: rgba(255, 0 ,0,0);" onmouseover="changeText(' + spec[i].rank + ', \'' + currSel + '\', ' + spec[i].line + ', \'' + spec[i].from.toString() + '\')" /><circle class="fsk-svg-node" cx="' + currHalf + '" cy="' + rank + '" r="3"/></g>');
+        nodes.push('<g class="fsk-svg-group"><rect x="' + curr + '" y="0" width="' + steps +'" height="100%"  style="cursor: pointer; fill: rgba(255, 0 ,0,0);" onmouseover="changeText(' + spec[i].rank + ', \'' + currSel + '\', ' + spec[i].line + ', \'' + spec[i].from.toString() + '\')" /><circle class="fsk-svg-node" cx="' + currHalf + '" cy="' + rank + '" r="6"/></g>');
     }
 
 
-    var specSVG = '<?xml-stylesheet type="text/css" href="../css/fsk.css" ?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + svgWidth + ' ' +  svgHeight + '" onload="init()"><script><![CDATA[var text, textSpec, textSel, textFile, textLine;function init(){textSpec = document.getElementById("textSpec");textSel = document.getElementById("textSel");textFile = document.getElementById("textFile");textLine = document.getElementById("textLine");}function changeText(spec,sel,line,from){textSpec.textContent = spec;textSel.textContent = sel;textFile.textContent = from;textLine.textContent = line};function restoreText(){textSpec.textContent = "00"};]]></script><style>.fsk-svg-node{display:none; stroke:#555;stroke-width:1px;fill:#992053;cursor:pointer;}.fsk-svg-path{fill:none;stroke:#555;stroke-width:2px;} .fsk-svg-group { position: relative; } .fsk-svg-group:hover .fsk-svg-node {display:block;} .fsk-svg-group:hover .fsk-svg-dotted {display: block;}</style><path style="stroke:#000;" d="M0,' + (svgHeight - 3) + ' L' + svgWidth + ',' + (svgHeight - 3) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 53) + ' L' + svgWidth + ',' + (svgHeight - 53) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 103) + ' L' + svgWidth + ',' + (svgHeight - 103) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 153) + ' L' + svgWidth + ',' + (svgHeight - 153) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 203) + ' L' + svgWidth + ',' + (svgHeight - 203) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 253) + ' L' + svgWidth + ',' + (svgHeight - 253) + '"></path><path id="svgPath" class="fsk-svg-path" d="' + points.join('') + '"></path>' + nodes.join('') + '<text transform="translate(10 24)" fill="#555" font-family="sans-serif" font-size="24" id="textSpec">--</text><text transform="translate(10 40)" fill="#444" font-family="sans-serif" font-size="10" id="textSel">null</text><text transform="translate(55 20)" fill="#666" font-family="sans-serif" font-size="10">line: </text><text transform="translate(75 20)" fill="#444" font-family="sans-serif" font-size="10" id="textLine">--</text><text transform="translate(100 20)" fill="#666" font-family="sans-serif" font-size="10">file: </text><text transform="translate(120 20)" fill="#444" font-family="sans-serif" font-size="10" id="textFile">null</text></svg>';
+    var specSVG = '<?xml-stylesheet type="text/css" href="../css/theme.css" ?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + svgWidth + ' ' +  svgHeight + '" onload="init()"><script><![CDATA[var text, textSpec, textSel, textFile, textLine;function init(){textSpec = document.getElementById("textSpec");textSel = document.getElementById("textSel");textFile = document.getElementById("textFile");textLine = document.getElementById("textLine");}function changeText(spec,sel,line,from){textSpec.textContent = spec;textSel.textContent = sel;textFile.textContent = from;textLine.textContent = line};function restoreText(){textSpec.textContent = "00"};]]></script><style>.fsk-svg-node{display:none;  stroke: #eee; stroke-width: 3px; cursor:pointer;}.fsk-svg-path{fill:none;stroke:#555;stroke-width:2px;} .fsk-svg-group { position: relative; } .fsk-svg-group:hover .fsk-svg-node {display:block;} .fsk-svg-group:hover .fsk-svg-dotted {display: block;}</style><path style="stroke:#000;" d="M0,' + (svgHeight - 3) + ' L' + svgWidth + ',' + (svgHeight - 3) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 53) + ' L' + svgWidth + ',' + (svgHeight - 53) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 103) + ' L' + svgWidth + ',' + (svgHeight - 103) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 153) + ' L' + svgWidth + ',' + (svgHeight - 153) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 203) + ' L' + svgWidth + ',' + (svgHeight - 203) + '"></path><path style="stroke:#999;" d="M0,' + (svgHeight - 253) + ' L' + svgWidth + ',' + (svgHeight - 253) + '"></path><path id="svgPath" class="fsk-svg-path" d="' + points.join('') + '"></path>' + nodes.join('') + '<text transform="translate(10 24)" fill="#555" font-family="sans-serif" font-size="24" id="textSpec">--</text><text transform="translate(10 40)" fill="#444" font-family="sans-serif" font-size="10" id="textSel">null</text><text transform="translate(55 20)" fill="#666" font-family="sans-serif" font-size="10">line: </text><text transform="translate(75 20)" fill="#444" font-family="sans-serif" font-size="10" id="textLine">--</text><text transform="translate(100 20)" fill="#666" font-family="sans-serif" font-size="10">file: </text><text transform="translate(120 20)" fill="#444" font-family="sans-serif" font-size="10" id="textFile">null</text></svg>';
 
     return specSVG;
  }

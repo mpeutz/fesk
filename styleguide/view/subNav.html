@@ -1,20 +1,5 @@
-<div class="fsk-sub-nav-heading">
-    <!-- <div class="fsk-sub-navheading-title">Sections</div> -->
-    <div class="fsk-sub-navicon fsk-open" data-target="fsk-markup">
-        <div svg-icon icon="code"></div>
-    </div>
-    <div class="fsk-sub-navicon fsk-open" data-target="fsk-usage">
-        <div svg-icon icon="note"></div>
-    </div>
-    <div class="fsk-sub-navicon fsk-open" data-target="fsk-compatibility">
-        <div svg-icon icon="compatiblity"></div>
-    </div>
-    <div class="fsk-sub-navicon fsk-open" data-target="fsk-tags">
-        <div svg-icon icon="tag"></div>
-    </div>
-</div>
 <ul class="fsk-sub-nav-list" du-spy-contex du-scroll-container="fsk-content">
-    <li class="fsk-sub-nav-item repeat-animation" ng-repeat="section in fsk | filter:sectionGroup( ) " >
+    <li class="fsk-sub-nav-item repeat-animation" ng-repeat="section in fsk | filter:sectionGroup( ) ">
         <a href="#{{ section.title | flatten}}" du-scrollspy du-smooth-scroll offset="80" fsk-ripple>
             <span class="fsk-name">{{section.title}}</span>
             <span class="fsk-ref">{{section.order}}</span>

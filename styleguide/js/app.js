@@ -287,7 +287,7 @@ angular.module("fskApp").directive("copyMarkup", function() {
                   'OAnimation':'oAnimationEnd',
                   'MozAnimation':'animationend',
                   'WebkitAnimation':'webkitAnimationEnd'
-                }
+                };
 
                 for(t in animations){
                     if( el.style[t] !== undefined ){
@@ -407,6 +407,21 @@ angular.module( "fskApp" ).directive( 'stickyHeader', function() {
         }
     };
 } );
+
+angular.module('fskApp').directive("fskScrollBars", function () {
+   var res = {
+     restrict : 'AC',
+     link: function (scope, elem, attrs) {
+            scope.$watch('$viewContentLoaded', function(event) {
+               $( elem ).perfectScrollbar();
+               $( elem ).perfectScrollbar('update');
+            });
+        }
+     };
+  return res;
+});
+
+
 
 angular.module( 'fskApp' ).directive( 'markdown', function() {
     var converter = new Showdown.converter({'strikethrough':true});

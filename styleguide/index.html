@@ -32,16 +32,15 @@
     <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="js/angular.js"></script>
     <script type="text/javascript" src="js/angular-route-min.js"></script>
+    <script type="text/javascript" src="js/angular-animate-min.js"></script>
     <script type="text/javascript" src="js/angular-sanitize-min.js"></script>
     <script type="text/javascript" src="js/angular-scroll.js"></script>
     <script type="text/javascript" src="js/webcomponents.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/showdown.js"></script>
     <script type="text/javascript" src="js/prisim.js"></script>
+    <script type="text/javascript" src="js/perfect-scrollbar.js"></script>
     <script type="text/javascript" src="js/snap.svg-min.js"></script>
-
-
-
 
 </head>
 
@@ -51,26 +50,58 @@
 
         <!-- Main navigation used to traverse the sections and helper pages. -->
         <aside class="fsk-nav">
-            <nav ng-include src="'view/mainNav.html'"></nav>
-            <div class="fsk-nav-footer"><a href="https://github.com/mpeutz/fesk">fesk styleguide</a> - 2015  |  ver: 0.0.1</div>
+            <div class="fsk-header">
+                <input id="searchText" class="fsk-search" type="text" ng-model="searched.val" search-input/>
+                <div class="fsk-header-title">{{fsk[0].client}} Styleguide</div>
+                <div class="fsk-search-icon">
+                    <div svg-icon icon="search"></div>
+                </div>
+                <div class="fsk-clear-icon fsk-clear">
+                    <div svg-icon icon="close"></div>
+                </div>
+            </div>
+            <div class="fsk-menu-wrap  fsk-scrollBars">
+                <nav ng-include src="'view/mainNav.html'"></nav>
+            </div>
+            <div class="fsk-nav-footer"><a href="https://github.com/mpeutz/fesk">fesk styleguide</a> - 2016 | ver: 0.0.1</div>
         </aside>
 
-        <!-- Sub navigation used to traverse the components and isolated components. -->
+
+        <!-- Sub navigation used to traverse and isolated components. -->
         <aside class="fsk-subnav" ng-if="$root.title == 'component'">
             <go-back></go-back>
         </aside>
         <aside class="fsk-subnav" ng-if="$root.title == 'search'">
             <go-back></go-back>
-            <nav ng-include src="'view/searchNav.html'"></nav>
+            <div class="fsk-submenu-wrap fsk-scrollBars">
+                <nav ng-include src="'view/searchNav.html'"></nav>
+            </div>
         </aside>
         <aside class="fsk-subnav" ng-if="$root.title == 'section'">
-            <nav ng-include src="'view/subNav.html'"></nav>
+            <div class="fsk-sub-nav-heading">
+                <!-- <div class="fsk-sub-navheading-title">Sections</div> -->
+                <div class="fsk-sub-navicon fsk-open" data-target="fsk-markup">
+                    <div svg-icon icon="code"></div>
+                </div>
+                <div class="fsk-sub-navicon fsk-open" data-target="fsk-usage">
+                    <div svg-icon icon="note"></div>
+                </div>
+                <div class="fsk-sub-navicon fsk-open" data-target="fsk-compatibility">
+                    <div svg-icon icon="compatiblity"></div>
+                </div>
+                <div class="fsk-sub-navicon fsk-open" data-target="fsk-tags">
+                    <div svg-icon icon="tag"></div>
+                </div>
+            </div>
+            <div class="fsk-submenu-wrap fsk-scrollBars">
+                <nav ng-include src="'view/subNav.html'"></nav>
+            </div>
         </aside>
 
 
 
         <!-- Content area -->
-        <div role="main" class="fsk-main" id="fsk-content" du-scroll-container>
+        <div role="main" class="fsk-main fsk-scrollBars" id="fsk-content" du-scroll-container>
             <div ng-view class="content-animate"></div>
         </div>
 

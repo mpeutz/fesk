@@ -17,22 +17,22 @@ var fs          = require( "fs" ),
     destCSS     = path.join(process.cwd() , "css/styles.css" ),
     docSource   = path.join(process.cwd() , "node_modules/fesk/docs/gudieline.md");
 
-var argv        = require( "yargs" )
-                .option( "i", { alias: "initailize", demand: false, describe: "Initialize project"} )
-                .option( "u", { alias: "update", demand: false, describe: "Update styleguide version" } )
-                .option( "g", { alias: "guide", demand: false, describe: "Generate styleguide" } )
-                .option( "t", { alias: "theme", demand: false, describe: "Generate theme colors for styleguide" } )
-                .option( "p", { alias: "partial", demand: false, describe: "Add a partial file to main styles" } )
-                .help( "?" )
-                .alias( "?", "help" )
-                .example( "fesk -i", "Follow prompts to initialize fesk" )
-                .example( "fesk -u", "Follow prompts to update styleguide version" )
-                .example( "fesk -g", "Parses styleguide" )
-                .example( "fesk -t", "Follow prompts to update styleguide theme" )
-                .example( "fesk -p", "Adds partial file to main stylesheets")
-                .example( "fesk", "generate styleguide" )
-                .epilog( "Produced by fesk - Made in Oregon." )
-                  .argv;
+var argv  = require( "yargs" )
+            .option( "i", { alias: "initailize", demand: false, describe: "Initialize project"} )
+            .option( "u", { alias: "update", demand: false, describe: "Update styleguide version" } )
+            .option( "g", { alias: "guide", demand: false, describe: "Generate styleguide" } )
+            .option( "t", { alias: "theme", demand: false, describe: "Generate theme colors for styleguide" } )
+            .option( "p", { alias: "partial", demand: false, describe: "Add a partial file to main styles" } )
+            .help( "?" )
+            .alias( "?", "help" )
+            .example( "fesk -i", "Follow prompts to initialize fesk" )
+            .example( "fesk -u", "Follow prompts to update styleguide version" )
+            .example( "fesk -g", "Parses styleguide" )
+            .example( "fesk -t", "Follow prompts to update styleguide theme" )
+            .example( "fesk -p", "Adds partial file to main stylesheets")
+            .example( "fesk", "generate styleguide" )
+            .epilog( "Produced by fesk - Made in Oregon." )
+            .argv;
 
 if ( !argv.i && !argv.init && !argv.u && !argv.update && !argv.g && !argv.guide && !argv.t && !argv.theme && !argv.partial && !argv.p ) {
     argv.g = true;
@@ -168,7 +168,7 @@ function feskInit() {
             overwrite: false,
             confirm: true
         },
-        function (err) { if (err) {return console.log('Woah, cool your jets pound cake, looks like something went awry.');}
+        function (err, files) { if (err) {return console.log('Woah, cool your jets pound cake, looks like something went awry.'+ files );}
     });
     console.log('Hoozah! the styleguide stuff has been generated');
 }
@@ -181,7 +181,7 @@ function feskFiles() {
             overwrite: false,
             confirm: true
         },
-        function (err) {if (err) {return console.log('Woah, cool your jets pound cake, looks like something went awry.');}
+        function (err) {if (err) {return console.log('Woah, cool your jets pound cake, looks like something went awry.'+ err );}
 
         if (argv.init || argv.i) {
 
@@ -255,7 +255,7 @@ function feskColors() {
 }
 
 function feskTheme(themeColor) {
-    var themeCSS = " /* Basic themeing classes (color, background-color, border-color) */ .theme-main { color: " + themeColor + "; } .theme-main-color { background-color: " + themeColor + "; } .theme-main-border { border-color: " + themeColor + "; } .theme-highlight:hover { background-color: " + fnHexTransparent(0.12, themeColor) + "; } /* Fill and stroke for themeing SVGs */.theme-main-fill { fill: " + themeColor + "; } .theme-main-stroke { stroke: "+ themeColor + "; } /* classes for themeing buttons. */ .theme-main-btn { color:" + fnLightness(themeColor) + "; background-color: " + themeColor + "; } .theme-main-btn:hover { color:" + fnLightness(themeColor) + "; background-color: " + fnShadeBlendConvert(-0.13, themeColor) + "; } ::-moz-selection, ::selection { color: #333; background: " + fnHexTransparent(0.3, themeColor) + "; } .fsk h1,.fsk h2, .fsk h3, .fsk h4, .fsk h5, .fsk h6 { color: " + themeColor + "} .fsk-ink { background: " + fnHexTransparent(0.3, themeColor) + ";} .fsk-nav-footer a { color: " + fnShadeBlendConvert(-0.3, themeColor) + "; } .fsk-sub-nav-item .active, .fsk-menu-item .active { color: " + themeColor + "; border-right-color: " + themeColor + "; } .fsk-svg-node { fill: " + themeColor + ";} .fsk-sub-navicon.is-triggered svg { fill: " + themeColor + "}";
+    var themeCSS = " /* Basic themeing classes (color, background-color, border-color) */ .theme-main { color: " + themeColor + "; } .theme-main-color { background-color: " + themeColor + "; } .theme-main-border { border-color: " + themeColor + "; } .theme-highlight:hover { background-color: " + fnHexTransparent(0.12, themeColor) + "; } /* Fill and stroke for themeing SVGs */.theme-main-fill { fill: " + themeColor + "; } .theme-main-stroke { stroke: "+ themeColor + "; } /* classes for themeing buttons. */ .theme-main-btn { color:" + fnLightness(themeColor) + "; background-color: " + themeColor + "; } .theme-main-btn:hover { color:" + fnLightness(themeColor) + "; background-color: " + fnShadeBlendConvert(-0.13, themeColor) + "; } ::-moz-selection, ::selection { color: #333; background: " + fnHexTransparent(0.3, themeColor) + "; } .fsk h1,.fsk h2, .fsk h3, .fsk h4, .fsk h5, .fsk h6 { color: " + themeColor + "} .fsk-ink { background: " + fnHexTransparent(0.3, themeColor) + ";} .fsk-nav-footer a { color: " + fnShadeBlendConvert(-0.3, themeColor) + "; } .fsk-sub-nav-item .active, .fsk-menu-item .active { color: " + themeColor + "; border-right-color: " + themeColor + "; } .fsk-svg-node { fill: " + themeColor + ";} .fsk-sub-navicon.is-triggered svg { fill: " + themeColor + "} .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y { background-color: " + fnShadeBlendConvert(-0.5, themeColor) + "} .ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y { background-color: " + themeColor + ";}.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y { background-color: " + fnShadeBlendConvert(0.13, themeColor) + ";}";
 
 
     fs.writeFile('./styleguide/css/theme.css', themeCSS.toString() , function (err,data) {

@@ -292,6 +292,7 @@ p.ui {
     margin-top: 0;
     margin-bottom: 0.5em;
     text-rendering: optimizeLegibility;
+    letter-spacing: 0.15em;
 }
 
 h1.ui,

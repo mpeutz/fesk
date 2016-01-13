@@ -76,23 +76,27 @@ p.ui {
     margin-top: 0;
     margin-bottom: 0.5em;
     text-rendering: optimizeLegibility;
+    letter-spacing: 0.15em;
 }
 
 h1.ui,
 .ui.h1 {
     font-size: 2.5em;
     font-weight: 700;
+    letter-spaceing: 0.015em;
 }
 
 h2.ui,
 .ui.h2 {
     font-size: 2em;
+    letter-spaceing: 0.015em;
 }
 
 h3.ui,
 .ui.h3 {
     font-size: 1.618em;
     font-weight: 700;
+    letter-spaceing: 0.015em;
 }
 
 h4.ui,
@@ -100,17 +104,20 @@ h4.ui,
     font-size: 1.1675em;
     text-transform: uppercase;
     font-weight: 700;
+    letter-spaceing: 0.015em;
 }
 
 h5.ui,
 .ui.h5 {
     font-size: 1em;
     text-transform: uppercase;
+    letter-spaceing: 0.015em;
 }
 
 h6.ui,
 .ui.h6 {
     font-size: 0.8em;
+    letter-spaceing: 0.015em;
 }
 
 p.ui {
