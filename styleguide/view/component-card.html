@@ -110,20 +110,183 @@
         <li class="fsk-accordion-content fsk-compatibility" ng-if="sec.compatibility && sec.compatibility != ''">
             <div class="fsk-compatibility-list">
                 <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ie.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserIE"></span>
                     {{sec.compatibility.ie}}
-                <div class="fsk-compatibility-title">Internet Explorer</div>
                 </div>
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ff.length > 0">{{sec.compatibility.ff}}<div class="fsk-compatibility-title">Firefox</div></div>
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.chr.length > 0">{{sec.compatibility.chr}}<div class="fsk-compatibility-title">Chrome</div></div>
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.op.length > 0">{{sec.compatibility.op}}<div class="fsk-compatibility-title">Opera</div></div>
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ios.length > 0">{{sec.compatibility.ios}}<div class="fsk-compatibility-title">iOS</div></div>
-                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.and.length > 0">{{sec.compatibility.and}}<div class="fsk-compatibility-title">Android</div></div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ff.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserFF"></span>
+                    {{sec.compatibility.ff}}
+                </div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.chr.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserCHR"></span>
+                    {{sec.compatibility.chr}}
+                </div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.op.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserOP"></span>
+                    {{sec.compatibility.op}}
+                </div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ios.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserIOS"></span>
+                    {{sec.compatibility.ios}}
+                </div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.and.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserAND"></span>
+                    {{sec.compatibility.and}}
+                </div>
             </div>
         </li>
         <li class="fsk-accordion-content fsk-tags" ng-if="sec.tags && sec.tags">
             <div class="fsk-tag-list">
                 <div class="fsk-tag" ng-repeat="tag in sec.tags">
                     <span class="fsk-svg-icon" svg-icon icon="tag"></span><span class="fsk-tag-span">{{sec.tags[$index]}}</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+    </div>
+
+</div>
+<!-- component header -->
+<div class="fsk-header" ng-if="sec.group">
+    <div class="fsk-title theme-main-color">
+        <a class="fsk-title-isolate" href="#/{{sec.group}}/{{sec.order}}" ng-if="!(sec.type == 'chapter' || sec.code == '')">
+            <span class="fsk-title-number">{{sec.order}}</span>
+            <span class="fsk-title-text">{{ sec.title}}</span>
+        </a>
+        <span class="fsk-title-isolate" ng-if="sec.type == 'chapter' || sec.code == ''">
+            <span class="fsk-title-number">{{sec.order}}</span>
+            <span class="fsk-title-text">{{ sec.title}}</span>
+        </span>
+        <span class="fsk-source">{{sec.file}}</span>
+        <div class="fsk-special-tags">
+            <div class="fsk-java-icon fsk-tag-tooltip" title="this component requires javascript" ng-if="sec.tags | inArray: 'scripted'">
+                <div svg-icon icon="java"></div>
+            </div>
+            <div class="fsk-beta-icon fsk-tag-tooltip" title="this is a beta component" ng-if="sec.tags | inArray: 'beta'">
+                <div svg-icon icon="beta"></div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<!-- component description -->
+<div class="fsk-description">
+    <pre class="fsk-description-text" ng-bind-html="renderHtml(sec.description.toString())"></pre>
+</div>
+
+<!-- component modifiers -->
+<div class="fsk-mod fsk-{{sec.type}}-block"  ng-if="sec.code.length > 1">
+    <ul class="fsk-mod-list">
+        <li class="fsk-mod-item" ng-repeat="mod in sec.code">
+            <div class="fsk-mod-text">
+                <span class="fsk-mods-classname">{{mod.title}}</span>
+                <span> · </span>
+                <span class="fsk-mods-description">{{mod.description}}</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- color documentation -->
+<div class="fsk-colors" ng-if="sec.type == 'color'">
+    <ul class="fsk-color-list">
+        <li class="fsk-color-item" ng-repeat="hue in sec.color">
+            <div class="fsk-color-item-chip" ng-style="{backgroundColor:hue.hue}"></div>
+            <div class="fsk-color-item-hue">{{hue.hue}}</div>
+            <div class="fsk-color-item-name">{{hue.title}}</div>
+            <div class="fsk-color-item-use">{{hue.use}}</div>
+        </li>
+    </ul>
+</div>
+
+<!-- preprocessor documentation -->
+<div class="fsk-processor" ng-if="sec.type == 'preprocessor'">
+    <div class="fsk-processor-vars">Variables</div>
+    <ul class="fsk-processor-list">
+        <li class="fsk-processor-item" ng-repeat="vari in sec.vars">
+            <span class="fsk-processor-item-name">{{vari.title}}</span>
+            <span class="fsk-processor-item-use">{{vari.use}}</span>
+        </li>
+    </ul>
+</div>
+
+<!-- component example -->
+<div class="fsk-example" ng-if="!(sec.type == 'chapter' || sec.code == '' || sec.type == 'color')">
+
+    <ul class="fsk-code-list">
+        <li class="fsk-code-item" ng-repeat="codes in sec.code">
+            <div class="fsk-code-title" ng-if="sec.code.length > 1">{{codes.title}}</div>
+            <shadow-dom>
+                <pre class="fsk-example-code" ng-bind-html="renderHtml(codes.code.toString())"></pre>
+            </shadow-dom>
+        </li>
+    </ul>
+</div>
+
+<!-- Component Markup -->
+<div class="fsk-extras"  ng-if="!(sec.type == 'chapter' || sec.type == 'color') || !( sec.code != '' && sec.note != '' && sec.compatibility != '' && sec.tags != '')">
+
+    <div class="fsk-accordion">
+    <div class="fsk-accordion-triggers">
+        <a class="fsk-accordion-trigger" data-target="fsk-markup" ng-if="sec.code && sec.code != ''"> Markup </a>
+        <a class="fsk-accordion-trigger" data-target="fsk-markup" ng-if="sec.type == 'preprocessor' && sec.logic != ''"> Logic </a>
+        <a class="fsk-accordion-trigger" data-target="fsk-usage" ng-if="sec.note && sec.note != ''"> Usage </a>
+        <a class="fsk-accordion-trigger" data-target="fsk-compatibility" ng-if="sec.compatibility && sec.compatibility != ''"> Compatibility </a>
+        <a class="fsk-accordion-trigger" data-target="fsk-tags" ng-if="sec.tags && sec.tags"> Tags </a>
+    </div>
+
+    <ul class="fsk-accordion-contentGroup">
+        <li class="fsk-accordion-content fsk-markup"  ng-if="sec.code && sec.code != ''">
+            <div class="fsk-markup-container">
+                <button class="fsk-copy-markup theme-main-btn" copy-markup>copy it!<textarea style="position: absolute;left: -9999px; visibility: none">{{sec.code[0].code}}</textarea></button>
+                <pre ng-prism class="language-{{sec.type}} fsk-markup-code line-numbers" ng-if="sec.code && sec.code != ''">{{sec.code[0].code}}</pre>
+            </div>
+        </li>
+        <li class="fsk-accordion-content fsk-markup"  ng-if="sec.type == 'preprocessor' && sec.logic != ''">
+            <div class="fsk-markup-container">
+                <pre ng-prism class="language-{{sec.lang}} fsk-markup-code line-numbers"ng-if="sec.type == 'preprocessor' && sec.logic != ''">{{sec.logic}}</pre>
+            </div>
+        </li>
+        <li class="fsk-accordion-content fsk-usage" ng-if="sec.note && sec.note != ''">
+            <div class="fsk-notes">
+                <div class="fsk-note">{{sec.note}}</div>
+            </div>
+        </li>
+        <li class="fsk-accordion-content fsk-compatibility" ng-if="sec.compatibility && sec.compatibility != ''">
+            <div class="fsk-compatibility-list">
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ie.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserIE"></span>
+                    {{sec.compatibility.ie}}
+                </div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ff.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserFF"></span>
+                    {{sec.compatibility.ff}}
+                </div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.chr.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserCHR"></span>
+                    {{sec.compatibility.chr}}
+                </div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.op.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserOP"></span>
+                    {{sec.compatibility.op}}
+                </div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.ios.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserIOS"></span>
+                    {{sec.compatibility.ios}}
+                </div>
+                <div class="fsk-compatibility-chip" ng-if="sec.compatibility.and.length > 0">
+                    <span class="fsk-svg-icon fsk-browser-icon" svg-icon icon="browserAND"></span>
+                    {{sec.compatibility.and}}
+                </div>
+            </div>
+        </li>
+        <li class="fsk-accordion-content fsk-tags" ng-if="sec.tags && sec.tags">
+            <div class="fsk-tag-list">
+                <div class="fsk-tag" ng-repeat="tag in sec.tags">
+                    <span class="fsk-svg-icon" svg-icon icon="tag"></span><span class="fsk-tag-span" ng-click="tagSearch(sec.tags[$index])">{{sec.tags[$index]}}</span>
                 </div>
             </div>
         </li>

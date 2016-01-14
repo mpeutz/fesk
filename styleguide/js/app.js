@@ -136,6 +136,15 @@ fskApp.controller( 'titleCtrl', function( $scope, $location, $http, $routeParams
         }
     };
 
+    $scope.tagSearch = function(searchText) {
+        var input = $('#searchText');
+        input.val(searchText);
+        input.trigger('input');
+        $location.path('/search');
+        input.addClass( 'is-focused' );
+    };
+
+
 
 } );
 
