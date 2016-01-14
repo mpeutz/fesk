@@ -271,7 +271,7 @@ module.exports = function styleGuide( opts ) {
 
         // Sort JSON array so section are in group/reference order
         styleJSON.sort( function( a, b ) {
-            return parseFloat( a.reference ) - parseFloat( b.reference );
+            return parseFloat( a.group + a.reference * 10 ) - parseFloat( b.group + b.reference * 10 );
         } );
 
         // Build the TOC and insert it at the top of the stylesheet
