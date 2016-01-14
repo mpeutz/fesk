@@ -361,7 +361,11 @@ angular.module( "fskApp" ).directive( "searchInput", function( $interval ) {
             } );
             $( '.fsk-clear' ).on( 'click', function() {
                 $( elem ).val( '' );
-                window.location.hash = loc;
+                if (loc === undefined) {
+                    window.location.hash = '/1';
+                } else {
+                    window.location.hash = loc;
+                }
                 $( elem ).removeClass( 'is-focused' );
             } );
         }
