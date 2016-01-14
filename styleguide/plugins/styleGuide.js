@@ -213,6 +213,7 @@ module.exports = function styleGuide( opts ) {
                     reference: '',
                     type: 'color',
                     title: '',
+                    note: '',
                     description: '',
                     color: []
                 };
@@ -220,6 +221,7 @@ module.exports = function styleGuide( opts ) {
                 for ( var o = 0; o < colors.length; o++ ) {
                     var colorProp = colors[ o ].toString();
                     getTitle( colorProp, colorBlock );
+                    getNote( colorProp, colorBlock );
                     getDescription( colorProp, colorBlock );
                     getColorRef( colorProp, colorBlock );
                     getColorList( colorProp, colorBlock );
@@ -330,7 +332,7 @@ getColorRef = function( prop, data ) {
     if ( hasPrefix( prop, 'colors' ) ) {
         var subprop = prop.replace( /^\s*?[a-z ]+\:\s+?/i, '' );
         data.order = singleLine( subprop );
-        data.group = singleLine( subprop.replace( /[\^.]+\d/, '' ) );
+        data.group = singleLine( subprop.replace( /\.+[0-9]*/, '' ) );
         data.reference = singleLine( subprop.replace( /\d*\./, '' ) );
     }
 };
@@ -358,7 +360,7 @@ getprocessorRef = function( prop, data ) {
     if ( hasPrefix( prop, 'process' ) || hasPrefix( prop, 'processor' ) || hasPrefix( prop, 'sass' ) || hasPrefix( prop, 'scss' )) {
         var subprop = prop.replace( /^\s*?[a-z ]+\:\s+?/i, '' );
         data.order = singleLine( subprop );
-        data.group = singleLine( subprop.replace( /[\^.]+\d/, '' ) );
+        data.group = singleLine( subprop.replace( /\.+[0-9]*/, '' ) );
         data.reference = singleLine( subprop.replace( /\d*\./, '' ) );
     }
 };
@@ -397,7 +399,7 @@ getRef = function( prop, data ) {
     if ( hasPrefix( prop, 'section' ) ) {
         var subprop = prop.replace( /^\s*?[a-z ]+\:\s+?/i, '' );
         data.order = singleLine( subprop );
-        data.group = singleLine( subprop.replace( /[\^.]+\d/, '' ) );
+        data.group = singleLine( subprop.replace( /\.+[0-9]*/, '' ) );
         data.reference = singleLine( subprop.replace( /\d*\./, '' ) );
     }
 };
